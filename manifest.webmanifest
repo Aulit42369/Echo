@@ -3,7 +3,7 @@
   "short_name": "ÉCHO",
   "description": "In the dark, only the echo guides you.",
   "lang": "en",
-  "id": "./",
+  "id": "/Echo/",
   "start_url": "./",
   "scope": "./",
   "display": "fullscreen",
