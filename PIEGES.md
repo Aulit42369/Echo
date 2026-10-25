@@ -15,3 +15,5 @@
 - **Le défi est figé au lancement** (`defiJour`) : ne pas recalculer `Defi.today()` en cours de partie.
 - **Raccourci P (partage) avant `if (e.repeat) return;`** : il doit ignorer lui-même `e.repeat`, sinon la touche maintenue relance le partage ; `partager()` est en plus verrouillé par `partageEnCours` (double clic).
 - **JSON-LD en fin de `<body>`** (25/10) : `tests/defi.test.js` exige que `defi.js` soit le **premier** `<script>` de `index.html` ; un bloc `application/ld+json` dans le `<head>` fait échouer le test.
+
+- **Fichier `google9ad7f8bd44912903.html` (25/10)** : validation Google Search Console (propriété + sitemap envoyé). Ne jamais le supprimer ni le renommer, sinon la propriété perd sa validation.
