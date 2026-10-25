@@ -20,6 +20,8 @@
   `js/i18n.js` ; cache `echo-v2.0` ; nouveaux tests `chargement.test.js` (page exécutée dans un faux navigateur) et `geometrie.test.js`
   (vecteurs pour Android) : 33 tests. Android : `GameView.kt` (2 464 l.) découpé en 14 fichiers (≤ 344 l.), `GeometrieTest.kt` (14 tests JUnit).
 
+- 25/10 : adresse de contact **aulit42369@gmail.com** dans `privacy.html` (7 langues, lien `mailto:`, tickets GitHub en second choix), cache `echo-v2.1`. L'appli Android ouvre la page en ligne : rien à reconstruire. Pas de champ contact dans `fastlane` (adresse à saisir dans la Play Console, voir `PLAY_STORE.md`).
+
 ## En cours
 - Rien.
 
@@ -29,7 +31,6 @@
 - Purger un jour les anciennes clés `echo_daily_*` (une par jour joué).
 
 - **URL de politique dans la Play Console à vérifier** : `PLAY_STORE.md` donnait `…/echo/privacy.html` (minuscule, **404**) — corrigé le 25/10 en `https://aulit42369.github.io/Echo/privacy.html` ; vérifier ce qui est saisi dans la Play Console.
-- Ajouter une adresse e-mail de contact publique dans `privacy.html` si souhaité (aujourd'hui : tickets GitHub).
 - `robots.txt` impossible : il devrait être à la racine `aulit42369.github.io/` (aucun dépôt utilisateur) — seul `sitemap.xml` est fourni, à déclarer dans Google Search Console.
 - Mesure d'audience : rien d'installé (à décider ; si oui, option sans cookie type GoatCounter/Plausible, à ajouter à `privacy.html`).
 
@@ -39,7 +40,7 @@
 - 25/10 : « Autres jeux » sur l'**accueil** (pastille en haut à droite), pas dans Options (déjà plein) ; Android identique (écran dédié).
 - 25/10 : In-App Review comptée sur des **jours différents** réussis (rejouer le même défi ne compte pas).
 - 25/10 : `pwa/` du projet Android n'est plus mise à jour (ancienne copie) ; la PWA vit ici.
-- 25/10 : contact de la politique = page « Issues » du dépôt GitHub (aucune adresse personnelle publiée sans accord).
+- 25/10 (décision d'Olivier) : contact public = **aulit42369@gmail.com** (lien `mailto:` dans `privacy.html`, toutes les langues), les tickets GitHub restent proposés en second.
 - 25/10 : CGU et mentions légales dans `privacy.html` (une seule page, déjà liée depuis le Play Store) plutôt qu'une page de plus.
 - Défi du jour : minuit **heure de Paris** pour tout le monde (pas le minuit local du joueur) — option sûre, question Q1 posée à Olivier.
 - Texte partagé traduit dans la langue du joueur (Q4) ; nom du jeu, `#n` et emoji non traduits.
