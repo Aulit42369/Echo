@@ -14,7 +14,8 @@ vivent dans `F:\Stream\files\JEUX\Echo-PlayStore-1.1.0\Echo`, pas ici.
 | `defi.js` | défi du jour commun aux 4 jeux (date de Paris, graine, série, partage) — **copie identique** dans LUMEN, Fragments, Résonance |
 | `sw.js` | service worker (cache `echo-vX.Y`) |
 | `manifest.webmanifest`, `icons/`, `screenshots/` | installation PWA |
-| `privacy.html` | politique de confidentialité (7 langues) |
+| `privacy.html` | confidentialité, conditions d'utilisation, mentions légales (7 langues) |
+| `404.html`, `sitemap.xml`, `og-image.png` | page introuvable, plan du site, image d'aperçu des liens |
 | `tests/` | tests automatiques |
 
 ## Tests

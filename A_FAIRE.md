@@ -8,6 +8,8 @@
 - 24/10 : premiers tests automatiques (`node --test`, 16 tests) ; README, ARCHITECTURE, PIEGES créés.
 - 24/10 : correction relecture — touche P maintenue sur l'écran de fin du défi : répétitions ignorées et un seul partage à la fois (`partageEnCours`), plus de faux « Résultat copié » pendant que la fenêtre de partage est ouverte (17 tests).
 
+- 25/10 : checklist « avant lancement » : `privacy.html` complétée dans les 7 langues (cookies, partage, conditions d'utilisation, mentions légales, contact = tickets GitHub au lieu de `CONTACT_EMAIL`), lien « Confidentialité · conditions » sur l'écran Options, titre + description + Open Graph + `og-image.png` 1200×630, `404.html` dans le style du jeu, `sitemap.xml`, contraste AA des petits textes du canvas (options inactives, note du défi, aide clavier, libellé mode audio), cache `echo-v1.7`.
+
 ## En cours
 - Rien.
 
@@ -17,7 +19,14 @@
 - Purger un jour les anciennes clés `echo_daily_*` (une par jour joué).
 - `index.html` dépasse largement 400 lignes : découpage à prévoir lors d'une revue L99.
 
+- **URL de politique du Play Store à vérifier** : `PLAY_STORE.md` (JEUX) indique `https://aulit42369.github.io/echo/privacy.html` (minuscule) qui renvoie **404** ; la bonne est `https://aulit42369.github.io/Echo/privacy.html`.
+- Ajouter une adresse e-mail de contact publique dans `privacy.html` si souhaité (aujourd'hui : tickets GitHub).
+- `robots.txt` impossible : il devrait être à la racine `aulit42369.github.io/` (aucun dépôt utilisateur) — seul `sitemap.xml` est fourni, à déclarer dans Google Search Console.
+- Mesure d'audience : rien d'installé (à décider ; si oui, option sans cookie type GoatCounter/Plausible, à ajouter à `privacy.html`).
+
 ## Décisions prises
+- 25/10 : contact de la politique = page « Issues » du dépôt GitHub (aucune adresse personnelle publiée sans accord).
+- 25/10 : CGU et mentions légales dans `privacy.html` (une seule page, déjà liée depuis le Play Store) plutôt qu'une page de plus.
 - Défi du jour : minuit **heure de Paris** pour tout le monde (pas le minuit local du joueur) — option sûre, question Q1 posée à Olivier.
 - Texte partagé traduit dans la langue du joueur (Q4) ; nom du jeu, `#n` et emoji non traduits.
 - Clé de record `echo_daily_AAAAMMJJ` conservée telle quelle : aucune migration.

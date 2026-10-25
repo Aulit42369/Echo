@@ -8,6 +8,9 @@ Rédigé le 24/10/2026 d'après le code réel (cas 1 — mobile).
 | `index.html` | jeu complet : réglages, sons (WebAudio), voix, gyroscope, génération des labyrinthes, boucle, rendu canvas, menus | ≈ 1 740 l. (**écart** : au-delà du seuil de 400 l., hérité) |
 | `defi.js` | défi du jour : date de Paris, numéro `#n`, graine FNV-1a + mulberry32, série de jours, texte et bouton de partage | ≈ 150 l. |
 | `sw.js` | cache hors ligne | 35 l. |
+| `privacy.html` | confidentialité + conditions d'utilisation + mentions légales (7 langues, choix par `#xx` ou langue du navigateur) ; URL donnée au Play Store, ne pas renommer | |
+| `404.html` | page introuvable (chemins absolus `/Echo/…`, retour auto au jeu) | |
+| `sitemap.xml`, `og-image.png` | référencement, image d'aperçu des liens 1200×630 | |
 | `tests/defi.test.js` | module commun (copie identique dans les 4 jeux, sauf la ligne `CHEMIN`) | |
 | `tests/echo-defi.test.js` | intégration propre à ÉCHO (contrôles statiques, textes, format du partage) | |
 
@@ -16,6 +19,7 @@ Rédigé le 24/10/2026 d'après le code réel (cas 1 — mobile).
   Les textes du défi du jour sont dans le bloc `<defi:i18n>` (`I18N_DEFI`), hors bloc généré, en attendant leur report dans `strings.json`.
 - Logique du défi : `defi.js` uniquement (même fichier dans les 4 jeux, contrôlé par empreinte FNV dans le test).
 - Palette : objet `COL` de `index.html`.
+- Libellé du lien légal (`legal`, 7 langues) : petit objet fusionné juste après `I18N_DEFI`, hors bloc généré. Lien HTML `#lienLegal` visible seulement sur l'écran Options (`majLienLegal()` dans `render()`).
 
 ## 3. Persistance (localStorage, sur l'appareil seulement)
 | Clé | Contenu |
@@ -32,7 +36,7 @@ Aucun secret, aucun réseau, aucune donnée personnelle. Le texte partagé ne co
 ## 5. Identité
 - URL : `https://aulit42369.github.io/Echo/` (**écart connu** : domaine partagé, contraire à la règle « un domaine par app » ; ne pas changer sans décision).
 - `id` du manifest : `/Echo/` — **ne jamais modifier**. `start_url` / `scope` : `./`.
-- Cache : préfixe `echo-` (actuel `echo-v1.6`) ; le SW ne supprime que les caches `echo-*`.
+- Cache : préfixe `echo-` (actuel `echo-v1.7`) ; le SW ne supprime que les caches `echo-*`.
 - Nom de jeu pour la graine du défi : `'echo'`.
 
 ## 6. Dépendances externes

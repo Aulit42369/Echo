@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ÉCHO · Page introuvable</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#05070a">
+<meta http-equiv="refresh" content="8; url=/Echo/">
+<link rel="icon" type="image/png" href="/Echo/icons/icon-192.png">
+<style>
+  /* Page servie par GitHub Pages pour toute adresse inconnue sous /Echo/ : chemins absolus obligatoires. */
+  :root { --bg: #05070a; --fg: #e9f4f6; --muted: #8fa3a8; --cyan: #5cf2ff; --red: #ff3b5c; color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); }
+  body { display: grid; place-items: center; font: 300 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; text-align: center; overflow: hidden; }
+  main { position: relative; padding: 24px 16px; max-width: 420px; }
+  .onde { position: absolute; left: 50%; top: 18%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #fff; }
+  .onde::before, .onde::after { content: ''; position: absolute; inset: -6px; border: 1.5px solid var(--cyan); border-radius: 50%; animation: onde 3s ease-out infinite; opacity: 0; }
+  .onde::after { animation-delay: 1.5s; }
+  @keyframes onde { from { transform: scale(.4); opacity: .8; } to { transform: scale(18); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .onde::before, .onde::after { animation: none; opacity: .4; transform: scale(4); } }
+  h1 { font-weight: 200; font-size: 40px; letter-spacing: .4em; margin: 120px 0 8px; padding-left: .4em; }
+  p { margin: 0 0 8px; }
+  .en { color: var(--muted); font-size: 14px; }
+  a.btn { display: inline-block; margin-top: 26px; padding: 14px 26px; border: 1.5px solid var(--cyan); border-radius: 26px; color: var(--cyan);
+    text-decoration: none; letter-spacing: .18em; text-transform: uppercase; font-size: 14px; background: rgba(92, 242, 255, .08); }
+  a.btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .auto { margin-top: 18px; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <span class="onde" aria-hidden="true"></span>
+  <h1>ÉCHO</h1>
+  <p>Ce couloir ne mène nulle part : la page demandée n'existe pas.</p>
+  <p class="en" lang="en">This corridor leads nowhere: the page doesn't exist.</p>
+  <a class="btn" href="/Echo/">Revenir au jeu</a>
+  <p class="auto">Retour automatique dans quelques secondes.</p>
+</main>
+</body>
+</html>

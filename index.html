@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>ÉCHO</title>
-<meta name="description" content="Dans le noir, seul l'écho te guide.">
+<title>ÉCHO — labyrinthe dans le noir, guidé par l'écho</title>
+<meta name="description" content="Dans le noir, seul l'écho te guide. Lance un écho pour révéler les murs et échappe aux Ombres : jeu de labyrinthe sonore gratuit, jouable hors ligne.">
 <meta name="theme-color" content="#05070a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,6 +13,18 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="canonical" href="https://aulit42369.github.io/Echo/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ÉCHO">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="ÉCHO — labyrinthe dans le noir">
+<meta property="og:description" content="Dans le noir, seul l'écho te guide. Lance un écho pour révéler les murs et échappe aux Ombres : jeu de labyrinthe sonore gratuit, jouable hors ligne.">
+<meta property="og:url" content="https://aulit42369.github.io/Echo/">
+<meta property="og:image" content="https://aulit42369.github.io/Echo/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ÉCHO : une onde cyan qui se propage dans le noir">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   /* Jeu plein écran sur canvas ; un seul univers visuel sombre, quel que soit le thème. */
   :root { --bg: #05070a; --fg: #ffffff; color-scheme: dark; }
@@ -25,6 +37,12 @@
     width: min(340px, calc(100% - 32px)); display: flex; flex-direction: column; gap: 10px; z-index: 2;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; }
   #defiFin[hidden], #defiCopie[hidden] { display: none; }
+  /* Lien vers privacy.html, en haut de l'écran Options (seul autre élément HTML sur le canvas) */
+  #lienLegal { position: fixed; top: max(10px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); z-index: 2; padding: 10px 14px;
+    color: rgba(255, 255, 255, .72); font: 300 11px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: .18em;
+    text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+  #lienLegal[hidden] { display: none; }
+  #lienLegal:focus-visible { outline: 2px solid #5cf2ff; outline-offset: 2px; border-radius: 6px; }
   #defiApercu { margin: 0; padding: 12px 16px; border: 1px solid rgba(255, 201, 77, .3); border-radius: 18px;
     background: rgba(5, 7, 10, .86); box-shadow: inset 0 0 22px rgba(92, 242, 255, .06);
     font: 13px/1.5 ui-monospace, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -41,6 +59,7 @@
 </head>
 <body>
 <canvas id="echo" tabindex="0" aria-label="ÉCHO, jeu de labyrinthe dans le noir"></canvas>
+<a id="lienLegal" href="privacy.html" hidden></a>
 <div id="defiFin" hidden>
   <pre id="defiApercu" role="img"></pre>
   <button id="defiPartager" type="button"></button>
@@ -59,6 +78,7 @@ const I18N = {"langs":[{"code":"fr","name":"Français","tts":"fr-FR"},{"code":"e
 const I18N_DEFI = {"defiAFaire":["#{0} · à faire","#{0} · to do","#{0} · pendiente","#{0} · offen","#{0} · da fare","#{0} · a fazer","#{0} · 未挑戦"],"defiFait":["#{0} · fait ✓ · {1}","#{0} · done ✓ · {1}","#{0} · hecho ✓ · {1}","#{0} · erledigt ✓ · {1}","#{0} · fatta ✓ · {1}","#{0} · feito ✓ · {1}","#{0} · クリア ✓ · {1}"],"defiSerie":["Jours de suite : {0} (record {1})","Days in a row: {0} (best {1})","Días seguidos: {0} (récord {1})","Tage in Folge: {0} (Rekord {1})","Giorni di fila: {0} (record {1})","Dias seguidos: {0} (recorde {1})","連続日数：{0}（最高 {1}）"],"defiSerieTxt":["{0} jours de suite","{0} days in a row","{0} días seguidos","{0} Tage in Folge","{0} giorni di fila","{0} dias seguidos","{0}日連続"],"defiProchain":["Prochain défi dans {0} h {1}","Next challenge in {0}h {1}m","Próximo reto en {0} h {1} min","Nächste Aufgabe in {0} Std. {1} Min.","Prossima sfida tra {0} h {1} min","Próximo desafio em {0} h {1} min","次のチャレンジまで {0}時間{1}分"],"defiDetail":["⏱ {0} · {1} échos","⏱ {0} · {1} echoes","⏱ {0} · {1} ecos","⏱ {0} · {1} Echos","⏱ {0} · {1} eco","⏱ {0} · {1} ecos","⏱ {0} · エコー {1}"],"defiPartager":["Partager le résultat","Share the result","Compartir el resultado","Ergebnis teilen","Condividi il risultato","Compartilhar o resultado","結果をシェア"],"defiPartage":["Résultat partagé","Result shared","Resultado compartido","Ergebnis geteilt","Risultato condiviso","Resultado compartilhado","結果をシェアしました"],"defiCopie":["Résultat copié","Result copied","Resultado copiado","Ergebnis kopiert","Risultato copiato","Resultado copiado","結果をコピーしました"],"defiManuel":["Copie le texte ci-dessous","Copy the text below","Copia el texto de abajo","Kopiere den Text unten","Copia il testo qui sotto","Copie o texto abaixo","下のテキストをコピーしてください"],"defiCopieLabel":["Texte du résultat","Result text","Texto del resultado","Ergebnistext","Testo del risultato","Texto do resultado","結果のテキスト"],"defiResume":["Défi {0} réussi, score {1}, série de {2} jours","Challenge {0} complete, score {1}, {2}-day streak","Reto {0} superado, puntuación {1}, racha de {2} días","Aufgabe {0} geschafft, {1} Punkte, Serie von {2} Tagen","Sfida {0} superata, punteggio {1}, serie di {2} giorni","Desafio {0} concluído, pontuação {1}, sequência de {2} dias","チャレンジ{0}達成、スコア{1}、{2}日連続"],"sDefiFin":["Défi réussi. Score {0}. Série de {1} jours. Touche pour revenir au menu, ou appuie sur P pour partager.","Challenge complete. Score {0}. {1}-day streak. Tap to return to the menu, or press P to share.","Reto superado. Puntuación {0}. Racha de {1} días. Toca para volver al menú o pulsa P para compartir.","Aufgabe geschafft. {0} Punkte. Serie von {1} Tagen. Tippe, um zum Menü zurückzukehren, oder drücke P zum Teilen.","Sfida superata. Punteggio {0}. Serie di {1} giorni. Tocca per tornare al menu o premi P per condividere.","Desafio concluído. Pontuação {0}. Sequência de {1} dias. Toque para voltar ao menu ou aperte P para compartilhar.","チャレンジ達成。スコア{0}。{1}日連続。タップでメニューに戻ります。Pキーでシェアできます。"]};
 // </defi:i18n>
 Object.assign(I18N.t, I18N_DEFI);
+Object.assign(I18N.t, { legal: ["Confidentialité · conditions", "Privacy · terms", "Privacidad · condiciones", "Datenschutz · Bedingungen", "Privacy · condizioni", "Privacidade · termos", "プライバシー・規約"] });
 let lang = 1;
 // Texte traduit ; {0}, {1}… remplacés par les arguments
 const L = (key, ...a) => { let r = (I18N.t[key] || [])[lang] || key; a.forEach((v, i) => { r = r.split('{' + i + '}').join(String(v)); }); return r; };
@@ -1307,6 +1327,7 @@ function beaconLight(x, y) {
 }
 
 function render() {
+  majLienLegal();
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.globalAlpha = 1; ctx.fillStyle = COL.BG; ctx.fillRect(0, 0, vw, vh);
   ctx.lineCap = 'round'; ctx.lineJoin = 'round';
@@ -1336,7 +1357,7 @@ function renderAudioWorld() {
   }
   fillCircle(pxs, pys, cell * 0.4, COL.WHITE, 0.08);
   fillCircle(pxs, pys, cell * 0.09, COL.WHITE, 0.8);
-  text(L('audioLabel'), vw / 2, vh * 0.78, 11, COL.WHITE, 0.27, 'center', 0.4);
+  text(L('audioLabel'), vw / 2, vh * 0.78, 11, COL.WHITE, 0.5, 'center', 0.4);
   const va = state === DEAD ? min(0.55, (t - stateT) * 2) : beatFlash * 0.55;
   if (va > 0.01) { ctx.globalAlpha = va; ctx.fillStyle = vignette; ctx.fillRect(0, 0, vw, vh); }
   ctx.globalAlpha = 1;
@@ -1613,13 +1634,20 @@ function renderTitle() {
   if (!accueil || Defi.parisDate().num !== accueil.j.num) majAccueil(); // minuit de Paris passé pendant l'accueil
   info.push([accueil.fait ? L('defiFait', accueil.j.n, nombre(accueil.score)) : L('defiAFaire', accueil.j.n), COL.GOLD, 0.85, accueil.serie]);
   info.push([audioMode ? L('audioMenuHint') : L('headphones'), COL.GOLD, 0.67]);
-  if (!matchMedia('(pointer: coarse)').matches) info.push([L('keyboard'), COL.CYAN, 0.45]);
+  if (!matchMedia('(pointer: coarse)').matches) info.push([L('keyboard'), COL.CYAN, 0.55]);
   info.forEach((l, k) => {
     const y = vh * 0.88 + k * 18, suite = l[3] > 0 ? '      ' + l[3] : '';
     text(l[0] + suite, cx, y, 11, l[1], l[2], 'center', 0.1);
     if (suite) { const w = ctx.measureText(l[0] + suite).width; flamme(cx - w / 2 + ctx.measureText(l[0] + '   ').width, y - 4, 5.5, l[2]); }
   });
   ctx.globalAlpha = 1;
+}
+
+function majLienLegal() {
+  const lienLegal = document.getElementById('lienLegal');
+  const voir = state === OPTIONS;
+  if (voir && lienLegal.textContent !== L('legal')) lienLegal.textContent = L('legal');
+  if (lienLegal.hidden === voir) lienLegal.hidden = !voir;
 }
 
 function renderOptions() {
@@ -1640,11 +1668,11 @@ function renderOptions() {
     roundRect(b.x, b.y, b.w, b.h, 26);
     ctx.globalAlpha = lit ? 0.12 : 0.03; ctx.fillStyle = col; ctx.fill();
     ctx.globalAlpha = lit || b.k === 4 ? 0.8 : 0.3; ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.stroke();
-    text(names[b.k], b.x + 22, b.y + b.h / 2 + 5, 13, col, lit || b.k === 4 ? 0.95 : 0.67, 'left', 0.2);
-    text(values[b.k], b.x + b.w - 22, b.y + b.h / 2 + 5, 13, col, lit || b.k === 4 ? 0.95 : 0.67, 'right', 0.1);
+    text(names[b.k], b.x + 22, b.y + b.h / 2 + 5, 13, col, lit || b.k === 4 ? 0.95 : 0.75, 'left', 0.2);
+    text(values[b.k], b.x + b.w - 22, b.y + b.h / 2 + 5, 13, col, lit || b.k === 4 ? 0.95 : 0.75, 'right', 0.1);
     text(desc[b.k], vw / 2, b.y + b.h + 17, 11, COL.WHITE, 0.47, 'center', 0.03);
   }
-  text(L('dailyNote'), vw / 2, vh * 0.96, 11, COL.WHITE, 0.43, 'center', 0.03);
+  text(L('dailyNote'), vw / 2, vh * 0.96, 11, COL.WHITE, 0.5, 'center', 0.03);
   ctx.globalAlpha = 1;
 }
 
