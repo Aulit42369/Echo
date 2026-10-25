@@ -10,7 +10,9 @@ vivent dans `F:\Stream\files\JEUX\Echo-PlayStore-1.1.0\Echo`, pas ici.
 
 | Fichier | Rôle |
 |---|---|
-| `index.html` | tout le jeu (canvas, sons, menus, niveaux) |
+| `index.html` | la page (HTML, SEO) ; charge `css/echo.css` puis les scripts dans l'ordre |
+| `css/echo.css` | styles |
+| `js/*.js` | le jeu, un fichier par responsabilité (textes, réglages, labyrinthe, sons, entrées, niveau, logique, échos, Ombres, rendu, écrans, défi, boucle) — tableau dans `ARCHITECTURE.md` |
 | `defi.js` | défi du jour commun aux 4 jeux (date de Paris, graine, série, partage) — **copie identique** dans LUMEN, Fragments, Résonance |
 | `share-card.js` | carte image 1080×1920 du défi (format story) + partage avec fichier, sinon téléchargement |
 | `autres-jeux.js` | pastille « AUTRES JEUX » de l'accueil et panneau des 3 autres jeux d'Aulit |
@@ -26,8 +28,9 @@ Depuis ce dossier : `node --test` (Node 24, aucune dépendance). Ne pas écrire 
 Après un changement voulu du défi ou du labyrinthe : `MAJ_PARITE=1 node --test`, puis recopier `tests/parite-android.json`
 dans `app/src/test/resources/` du projet Android (test de parité `PariteTest.kt`).
 
-Textes : `i18n/strings.json` du projet Android puis `python tools/gen_i18n.py` (écrit directement le bloc `<i18n:auto>` de ce `index.html`).
+Textes : `i18n/strings.json` du projet Android puis `python tools/gen_i18n.py` (écrit directement le bloc `<i18n:auto>` de `js/i18n.js`).
+Après un changement voulu de la géométrie (`js/echos.js`, `farCell`) : `MAJ_PARITE=1 node --test`, puis recopier aussi `tests/geometrie-android.json`.
 
 ## Mise en ligne
 
-GitHub Desktop → commit → Push origin. À chaque changement d'un fichier du jeu, monter `VERSION` dans `sw.js`.
+GitHub Desktop → commit → Push origin. À chaque changement d'un fichier du jeu, monter `VERSION` dans `sw.js` ; un nouveau fichier `js/` va aussi dans la liste `JEU` de `sw.js`.

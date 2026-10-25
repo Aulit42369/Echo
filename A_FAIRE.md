@@ -15,6 +15,10 @@
 - 25/10 : textes du défi + lien légal + nouveaux textes reportés dans `i18n/strings.json` (Android) ; bloc `<defi:i18n>` supprimé ; `gen_i18n.py` écrit maintenant ce `index.html`.
 - 25/10 : Android 1.4 (versionCode 5) : défi porté à l'identique (`Defi.kt`, `Mulberry32`, `farCell` en Double), partage image + texte, In-App Review après le 3e défi réussi, écran « autres jeux », lien confidentialité dans Options. Vecteurs de parité `tests/parite-android.json` rejoués par `PariteTest.kt`.
 - 25/10 : cache `echo-v1.9` ; 27 tests web.
+- 25/10 : **lot 18** refactorisation pure : `index.html` (1 840 l.) → HTML seul (102 l.) + `css/echo.css` + 15 fichiers `js/` (≤ 264 l.),
+  sans changement de comportement (trace dorée canvas identique avant/après, Chromium sans tête sans erreur) ; `gen_i18n.py` écrit
+  `js/i18n.js` ; cache `echo-v2.0` ; nouveaux tests `chargement.test.js` (page exécutée dans un faux navigateur) et `geometrie.test.js`
+  (vecteurs pour Android) : 33 tests. Android : `GameView.kt` (2 464 l.) découpé en 14 fichiers (≤ 344 l.), `GeometrieTest.kt` (14 tests JUnit).
 
 ## En cours
 - Rien.
@@ -23,7 +27,6 @@
 - Vérifier à l'œil la carte image (web et Android) sur téléphone : aucun rendu automatique possible dans les tests.
 - Quand LUMEN / Fragments / Résonance seront sur le Play Store : remplacer les liens de `JEUX` (`autres-jeux.js`) et `AutresJeux.JEUX` (Android).
 - Purger un jour les anciennes clés `echo_daily_*` (une par jour joué).
-- `index.html` dépasse largement 400 lignes : découpage à prévoir lors d'une revue L99.
 
 - **URL de politique dans la Play Console à vérifier** : `PLAY_STORE.md` donnait `…/echo/privacy.html` (minuscule, **404**) — corrigé le 25/10 en `https://aulit42369.github.io/Echo/privacy.html` ; vérifier ce qui est saisi dans la Play Console.
 - Ajouter une adresse e-mail de contact publique dans `privacy.html` si souhaité (aujourd'hui : tickets GitHub).
@@ -31,6 +34,7 @@
 - Mesure d'audience : rien d'installé (à décider ; si oui, option sans cookie type GoatCounter/Plausible, à ajouter à `privacy.html`).
 
 ## Décisions prises
+- 25/10 (lot 18) : découpage en **scripts classiques à portée globale** (pas de modules ES ni d'outil de construction) : fichiers statiques servis tels quels par GitHub Pages, code déplacé à l'identique. Android : **fonctions d'extension** de `GameView` (état gardé dans la classe) plutôt qu'une réécriture en classes séparées, pour ne rien changer au comportement.
 - 25/10 : image partagée par un **second bouton** (« Partager l'image ») : le partage texte existant et ses tests restent inchangés.
 - 25/10 : « Autres jeux » sur l'**accueil** (pastille en haut à droite), pas dans Options (déjà plein) ; Android identique (écran dédié).
 - 25/10 : In-App Review comptée sur des **jours différents** réussis (rejouer le même défi ne compte pas).

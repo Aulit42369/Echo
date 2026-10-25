@@ -1,8 +1,11 @@
 // ÉCHO — service worker : le jeu fonctionne hors ligne après la première visite.
 // Change VERSION à chaque mise à jour pour forcer le rafraîchissement du cache.
-const VERSION = 'echo-v1.9';
-const FILES = ['./', './index.html', './defi.js', './share-card.js', './autres-jeux.js', './privacy.html', './manifest.webmanifest',
-  './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png'];
+const VERSION = 'echo-v2.0';
+// Mêmes fichiers, même ordre que les balises de index.html (contrôlé par tests/chargement.test.js).
+const JEU = ['i18n', 'reglages', 'labyrinthe', 'sons', 'appareil', 'etat', 'entrees', 'niveau', 'logique', 'echos', 'ombres',
+  'rendu', 'ecrans', 'defi-ecran', 'boucle'].map(n => './js/' + n + '.js');
+const FILES = ['./', './index.html', './css/echo.css', './defi.js', './share-card.js', './autres-jeux.js', ...JEU,
+  './privacy.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

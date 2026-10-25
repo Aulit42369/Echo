@@ -7,7 +7,7 @@ const path = require('node:path');
 const ShareCard = require('../share-card.js');
 const AutresJeux = require('../autres-jeux.js');
 
-const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+const html = require('./page.js').source(); // index.html + css/ + js/, dans l'ordre de chargement
 
 /** Faux contexte 2D : note les textes écrits, accepte tout le reste. */
 function fauxCtx() {

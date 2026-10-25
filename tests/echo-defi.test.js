@@ -1,4 +1,4 @@
-// Contrôles propres à ÉCHO pour le défi du jour (index.html est un seul fichier : contrôles statiques + exécution des textes).
+// Contrôles propres à ÉCHO pour le défi du jour (contrôles statiques sur toute la page + exécution des textes).
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert/strict');
@@ -7,7 +7,7 @@ const path = require('node:path');
 const Defi = require('../defi.js');
 
 const racine = path.join(__dirname, '..');
-const html = fs.readFileSync(path.join(racine, 'index.html'), 'utf8');
+const html = require('./page.js').source(); // index.html + css/ + js/, dans l'ordre de chargement
 const sw = fs.readFileSync(path.join(racine, 'sw.js'), 'utf8');
 
 // Depuis le 25/10/2026, tous les textes (défi compris) viennent du bloc généré depuis i18n/strings.json.
@@ -22,8 +22,8 @@ const CLES_DEFI = ['defiAFaire', 'defiFait', 'defiSerie', 'defiSerieTxt', 'defiP
 function textesDefi() { const T = textes(); return Object.fromEntries(CLES_DEFI.map(k => [k, T[k]])); }
 const nbLangues = (html.match(/"langs":\[(.*?)\]/)[1].match(/"code"/g) || []).length;
 
-test('service worker : version echo-v1.9, modules en cache', () => {
-  assert.match(sw, /const VERSION = 'echo-v1.9';/);
+test('service worker : version echo-v2.0, modules en cache', () => {
+  assert.match(sw, /const VERSION = 'echo-v2.0';/);
   for (const f of ['defi.js', 'share-card.js', 'autres-jeux.js']) {
     assert.ok(sw.includes("'./" + f + "'"), f + ' en cache');
     assert.ok(html.includes('<script src="' + f + '"></script>'), f + ' chargé');

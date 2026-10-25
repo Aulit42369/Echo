@@ -1,4 +1,4 @@
-// Parité web ↔ Android : vecteurs de référence calculés avec le code de la PWA (defi.js + labyrinthe de index.html).
+// Parité web ↔ Android : vecteurs de référence calculés avec le code de la PWA (defi.js + js/labyrinthe.js).
 // Le même fichier parite-android.json est copié dans l'appli Android (app/src/test/resources/) et rejoué par PariteTest.kt.
 // Régénérer après un changement voulu : MAJ_PARITE=1 node --test   (puis recopier le fichier côté Android).
 'use strict';
@@ -8,10 +8,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const Defi = require('../defi.js');
 
-const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-const debut = html.indexOf('// Hasard reproductible'), fin = html.indexOf('// Son :');
-assert.ok(debut > 0 && fin > debut, 'section labyrinthe introuvable dans index.html');
-const code = html.slice(debut, fin).replace(/^\/\/.*$/m, '');
+const code = fs.readFileSync(path.join(__dirname, '..', 'js', 'labyrinthe.js'), 'utf8');
 const { mulberry32, shuffle, Maze } = new Function(code + '\nreturn { mulberry32, shuffle, Maze };')();
 
 function vecteurs() {
