@@ -20,10 +20,34 @@
     overscroll-behavior: none; -webkit-user-select: none; user-select: none;
     -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
   canvas { display: block; position: fixed; inset: 0; width: 100%; height: 100%; touch-action: none; outline: none; }
+  /* Fin du défi du jour : seul élément HTML posé sur le canvas, dans la palette néon du jeu */
+  #defiFin { position: fixed; left: 50%; bottom: max(20px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+    width: min(340px, calc(100% - 32px)); display: flex; flex-direction: column; gap: 10px; z-index: 2;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; }
+  #defiFin[hidden], #defiCopie[hidden] { display: none; }
+  #defiApercu { margin: 0; padding: 12px 16px; border: 1px solid rgba(255, 201, 77, .3); border-radius: 18px;
+    background: rgba(5, 7, 10, .86); box-shadow: inset 0 0 22px rgba(92, 242, 255, .06);
+    font: 13px/1.5 ui-monospace, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+  #defiPartager { min-height: 52px; padding: 0 20px; border-radius: 26px; border: 1.5px solid #ffc94d; cursor: pointer;
+    background: rgba(255, 201, 77, .12); color: #ffc94d; font-family: inherit; font-size: 14px; font-weight: 300;
+    letter-spacing: .18em; text-transform: uppercase; box-shadow: 0 0 26px rgba(255, 201, 77, .22); }
+  #defiPartager:active { background: rgba(255, 201, 77, .22); }
+  #defiPartager:focus-visible, #defiTexte:focus-visible { outline: 2px solid #5cf2ff; outline-offset: 3px; }
+  #defiEtat { min-height: 1.3em; margin: 0; text-align: center; color: #5cf2ff; font-size: 12px; letter-spacing: .06em; }
+  #defiCopie { display: flex; flex-direction: column; gap: 6px; color: rgba(255, 255, 255, .75); font-size: 12px; }
+  #defiTexte { -webkit-user-select: text; user-select: text; resize: none; padding: 10px 12px; border-radius: 12px;
+    border: 1px solid rgba(92, 242, 255, .4); background: #05070a; color: #fff; font: 12px/1.45 ui-monospace, Consolas, monospace; }
 </style>
 </head>
 <body>
 <canvas id="echo" tabindex="0" aria-label="ÉCHO, jeu de labyrinthe dans le noir"></canvas>
+<div id="defiFin" hidden>
+  <pre id="defiApercu" role="img"></pre>
+  <button id="defiPartager" type="button"></button>
+  <p id="defiEtat" role="status" aria-live="polite"></p>
+  <div id="defiCopie" hidden><label id="defiLabel" for="defiTexte"></label><textarea id="defiTexte" readonly rows="6"></textarea></div>
+</div>
+<script src="defi.js"></script>
 <script>
 (() => {
 'use strict';
@@ -31,6 +55,10 @@
 // <i18n:auto> généré par tools/gen_i18n.py — ne pas modifier à la main
 const I18N = {"langs":[{"code":"fr","name":"Français","tts":"fr-FR"},{"code":"en","name":"English","tts":"en-US"},{"code":"es","name":"Español","tts":"es-ES"},{"code":"de","name":"Deutsch","tts":"de-DE"},{"code":"it","name":"Italiano","tts":"it-IT"},{"code":"pt","name":"Português","tts":"pt-BR"},{"code":"ja","name":"日本語","tts":"ja-JP"}],"t":{"tagline":["Dans le noir, seul l'écho te guide.","In the dark, only the echo guides you.","En la oscuridad, solo el eco te guía.","Im Dunkeln führt dich nur das Echo.","Nel buio, solo l'eco ti guida.","No escuro, só o eco te guia.","闇の中、エコーだけが道しるべ。"],"play":["JOUER","PLAY","JUGAR","SPIELEN","GIOCA","JOGAR","プレイ"],"daily":["DÉFI DU JOUR","DAILY CHALLENGE","RETO DIARIO","TAGESAUFGABE","SFIDA DEL GIORNO","DESAFIO DO DIA","デイリーチャレンジ"],"options":["OPTIONS","OPTIONS","OPCIONES","OPTIONEN","OPZIONI","OPÇÕES","オプション"],"install":["INSTALLER L'APPLI","INSTALL THE APP","INSTALAR LA APP","APP INSTALLIEREN","INSTALLA L'APP","INSTALAR O APP","アプリをインストール"],"record":["Record : niveau {0} · ★ {1}","Best: level {0} · ★ {1}","Récord: nivel {0} · ★ {1}","Rekord: Level {0} · ★ {1}","Record: livello {0} · ★ {1}","Recorde: nível {0} · ★ {1}","最高記録：レベル{0} · ★ {1}"],"dailyRecord":["Défi du jour : {0} pts","Daily challenge: {0} pts","Reto diario: {0} pts","Tagesaufgabe: {0} Pkt.","Sfida del giorno: {0} punti","Desafio do dia: {0} pts","デイリー：{0}点"],"headphones":["🎧 Casque conseillé · vibrations activées","🎧 Headphones recommended · vibration on","🎧 Se recomiendan auriculares · vibración activada","🎧 Kopfhörer empfohlen · Vibration an","🎧 Cuffie consigliate · vibrazione attiva","🎧 Use fones de ouvido · vibração ativada","🎧 ヘッドホン推奨 · 振動オン"],"audioMenuHint":["Mode audio : touche le haut de l'écran pour jouer","Audio mode: tap the top of the screen to play","Modo audio: toca la parte superior de la pantalla para jugar","Audiomodus: tippe oben auf den Bildschirm zum Spielen","Modalità audio: tocca la parte alta dello schermo per giocare","Modo áudio: toque no topo da tela para jogar","オーディオモード：画面の上部をタップでプレイ"],"keyboard":["Clavier : flèches/ZQSD · Espace écho · F écho dirigé · E leurre · B balise","Keyboard: arrows/WASD · Space echo · F aimed echo · E decoy · B beacon","Teclado: flechas/WASD · Espacio eco · F eco dirigido · E señuelo · B baliza","Tastatur: Pfeile/WASD · Leertaste Echo · F gezieltes Echo · E Köder · B Leuchtfeuer","Tastiera: frecce/WASD · Spazio eco · F eco direzionale · E esca · B faro","Teclado: setas/WASD · Espaço eco · F eco direcionado · E isca · B farol","キーボード：矢印/WASD · Space エコー · F 指向性エコー · E おとり · B ビーコン"],"optEasy":["MODE FACILE","EASY MODE","MODO FÁCIL","LEICHTER MODUS","MODALITÀ FACILE","MODO FÁCIL","イージーモード"],"optReal":["ÉCHOS RÉALISTES","REALISTIC ECHOES","ECOS REALISTAS","REALISTISCHE ECHOS","ECO REALISTICHE","ECOS REALISTAS","リアルなエコー"],"optAudio":["MODE AUDIO","AUDIO MODE","MODO AUDIO","AUDIOMODUS","MODALITÀ AUDIO","MODO ÁUDIO","オーディオモード"],"optGyro":["GYROSCOPE","TILT CONTROL","GIROSCOPIO","NEIGUNGSSTEUERUNG","GIROSCOPIO","GIROSCÓPIO","傾き操作"],"optLang":["LANGUE","LANGUAGE","IDIOMA","SPRACHE","LINGUA","IDIOMA","言語"],"descEasy":["Traces des murs déjà vus, Ombres plus lentes","Walls you've seen leave a trace, slower Shadows","Los muros vistos dejan rastro, Sombras más lentas","Gesehene Wände bleiben sichtbar, langsamere Schatten","I muri già visti lasciano traccia, Ombre più lente","Paredes já vistas deixam rastro, Sombras mais lentas","見た壁が残る・影が遅くなる"],"descReal":["L'onde s'arrête sur les murs : angles morts","The wave stops at walls: blind spots","La onda se detiene en los muros: ángulos muertos","Die Welle stoppt an Wänden: tote Winkel","L'onda si ferma sui muri: angoli ciechi","A onda para nas paredes: pontos cegos","波は壁で止まる：死角が生まれる"],"descAudio":["Écran noir : joue au son, à la voix et aux vibrations","Black screen: play by sound, voice and vibration","Pantalla negra: juega con sonido, voz y vibración","Schwarzer Bildschirm: spiele mit Ton, Stimme und Vibration","Schermo nero: gioca con suono, voce e vibrazione","Tela preta: jogue pelo som, voz e vibração","画面は真っ暗：音と声と振動でプレイ"],"descGyro":["Incline le téléphone pour avancer","Tilt your phone to move","Inclina el teléfono para avanzar","Neige das Handy, um dich zu bewegen","Inclina il telefono per muoverti","Incline o celular para andar","スマホを傾けて移動"],"descGyroNA":["Capteur indisponible sur cet appareil","Sensor not available on this device","Sensor no disponible en este dispositivo","Sensor auf diesem Gerät nicht verfügbar","Sensore non disponibile su questo dispositivo","Sensor indisponível neste aparelho","この端末ではセンサーを使えません"],"descLang":["Langue des textes et de la voix","Language for text and voice","Idioma de los textos y la voz","Sprache für Texte und Stimme","Lingua dei testi e della voce","Idioma dos textos e da voz","テキストと音声の言語"],"yes":["OUI","ON","SÍ","AN","SÌ","SIM","オン"],"no":["NON","OFF","NO","AUS","NO","NÃO","オフ"],"back":["RETOUR","BACK","VOLVER","ZURÜCK","INDIETRO","VOLTAR","戻る"],"dailyNote":["Le défi du jour ignore le mode facile et les échos réalistes","The daily challenge ignores easy mode and realistic echoes","El reto diario ignora el modo fácil y los ecos realistas","Die Tagesaufgabe ignoriert leichten Modus und realistische Echos","La sfida del giorno ignora la modalità facile e le eco realistiche","O desafio do dia ignora o modo fácil e os ecos realistas","デイリーではイージーモードとリアルなエコーは無効"],"level":["NIVEAU {0}","LEVEL {0}","NIVEL {0}","LEVEL {0}","LIVELLO {0}","NÍVEL {0}","レベル {0}"],"floor":["ÉTAGE {0}/{1}","FLOOR {0}/{1}","PLANTA {0}/{1}","ETAGE {0}/{1}","PIANO {0}/{1}","ANDAR {0}/{1}","{0}/{1}階"],"floorBanner":["ÉTAGE {0}","FLOOR {0}","PLANTA {0}","ETAGE {0}","PIANO {0}","ANDAR {0}","{0}階"],"easyTag":["FACILE","EASY","FÁCIL","LEICHT","FACILE","FÁCIL","イージー"],"shards":["ÉCLATS {0}/{1}","SHARDS {0}/{1}","FRAGMENTOS {0}/{1}","SPLITTER {0}/{1}","FRAMMENTI {0}/{1}","FRAGMENTOS {0}/{1}","かけら {0}/{1}"],"echoes":["ÉCHOS · {0}","ECHOES · {0}","ECOS · {0}","ECHOS · {0}","ECO · {0}","ECOS · {0}","エコー · {0}"],"mother":["MÈRE DES OMBRES · {0} échos absorbés","MOTHER OF SHADOWS · {0} echoes absorbed","MADRE DE LAS SOMBRAS · {0} ecos absorbidos","MUTTER DER SCHATTEN · {0} Echos verschlungen","MADRE DELLE OMBRE · {0} eco assorbite","MÃE DAS SOMBRAS · {0} ecos absorvidos","影の母 · 吸収したエコー {0}"],"motherBanner":["LA MÈRE DES OMBRES","THE MOTHER OF SHADOWS","LA MADRE DE LAS SOMBRAS","DIE MUTTER DER SCHATTEN","LA MADRE DELLE OMBRE","A MÃE DAS SOMBRAS","影の母"],"decoy":["LEURRE × {0}","DECOY × {0}","SEÑUELO × {0}","KÖDER × {0}","ESCA × {0}","ISCA × {0}","おとり × {0}"],"beacon":["BALISE × {0}","BEACON × {0}","BALIZA × {0}","LEUCHTFEUER × {0}","FARO × {0}","FAROL × {0}","ビーコン × {0}"],"aim":["ÉCHO DIRIGÉ · glisse puis relâche","AIMED ECHO · slide, then release","ECO DIRIGIDO · desliza y suelta","GEZIELTES ECHO · wischen, dann loslassen","ECO DIREZIONALE · scorri e rilascia","ECO DIRECIONADO · deslize e solte","指向性エコー · スライドして離す"],"audioLabel":["MODE AUDIO","AUDIO MODE","MODO AUDIO","AUDIOMODUS","MODALITÀ AUDIO","MODO ÁUDIO","オーディオモード"],"deadTitle":["L'OMBRE T'A TROUVÉ","THE SHADOW FOUND YOU","LA SOMBRA TE ENCONTRÓ","DER SCHATTEN HAT DICH","L'OMBRA TI HA TROVATO","A SOMBRA TE ACHOU","影に見つかった"],"retry":["Touche pour réessayer","Tap to try again","Toca para reintentar","Tippen zum Wiederholen","Tocca per riprovare","Toque para tentar de novo","タップで再挑戦"],"dailyWin":["DÉFI RÉUSSI","CHALLENGE COMPLETE","RETO SUPERADO","AUFGABE GESCHAFFT","SFIDA SUPERATA","DESAFIO CONCLUÍDO","チャレンジ達成"],"dailyLine":["Temps {0} · {1} échos · éclats {2}/{3}","Time {0} · {1} echoes · shards {2}/{3}","Tiempo {0} · {1} ecos · fragmentos {2}/{3}","Zeit {0} · {1} Echos · Splitter {2}/{3}","Tempo {0} · {1} eco · frammenti {2}/{3}","Tempo {0} · {1} ecos · fragmentos {2}/{3}","タイム {0} · エコー {1} · かけら {2}/{3}"],"score":["Score {0}","Score {0}","Puntuación {0}","Punkte {0}","Punteggio {0}","Pontuação {0}","スコア {0}"],"newRecord":[" · nouveau record !"," · new record!"," · ¡nuevo récord!"," · neuer Rekord!"," · nuovo record!"," · novo recorde!"," · 新記録！"],"recordWas":[" · record {0}"," · best {0}"," · récord {0}"," · Rekord {0}"," · record {0}"," · recorde {0}"," · 記録 {0}"],"toMenu":["Touche pour revenir au menu","Tap to return to the menu","Toca para volver al menú","Tippen, um zum Menü zurückzukehren","Tocca per tornare al menu","Toque para voltar ao menu","タップでメニューへ"],"clearTitle":["SORTIE TROUVÉE","EXIT FOUND","SALIDA ENCONTRADA","AUSGANG GEFUNDEN","USCITA TROVATA","SAÍDA ENCONTRADA","出口を発見"],"clearLine":["Niveau {0} · {1} échos (★★★ si ≤ {2})","Level {0} · {1} echoes (★★★ if ≤ {2})","Nivel {0} · {1} ecos (★★★ si ≤ {2})","Level {0} · {1} Echos (★★★ bei ≤ {2})","Livello {0} · {1} eco (★★★ se ≤ {2})","Nível {0} · {1} ecos (★★★ se ≤ {2})","レベル{0} · エコー{1}回（{2}回以下で★★★）"],"deeper":["Touche pour descendre plus profond","Tap to go deeper","Toca para bajar más hondo","Tippen, um tiefer zu gehen","Tocca per scendere più in profondità","Toque para descer mais fundo","タップでさらに深くへ"],"hint_daily":["Défi du jour : le même labyrinthe pour tout le monde|Plus vite et moins d'échos = meilleur score","Daily challenge: the same maze for everyone|Faster and fewer echoes = better score","Reto diario: el mismo laberinto para todos|Más rápido y menos ecos = mejor puntuación","Tagesaufgabe: dasselbe Labyrinth für alle|Schneller und weniger Echos = mehr Punkte","Sfida del giorno: lo stesso labirinto per tutti|Più veloce e meno eco = punteggio migliore","Desafio do dia: o mesmo labirinto para todos|Mais rápido e menos ecos = pontuação melhor","デイリー：全員が同じ迷路|速く、エコー少なめ＝高スコア"],"hint_boss":["La Mère des Ombres t'entend où que tu sois|Chaque écho la nourrit : elle grandit et accélère","The Mother of Shadows hears you wherever you are|Every echo feeds her: she grows and speeds up","La Madre de las Sombras te oye estés donde estés|Cada eco la alimenta: crece y acelera","Die Mutter der Schatten hört dich überall|Jedes Echo nährt sie: sie wächst und wird schneller","La Madre delle Ombre ti sente ovunque tu sia|Ogni eco la nutre: cresce e accelera","A Mãe das Sombras ouve você onde estiver|Cada eco a alimenta: ela cresce e acelera","影の母はどこにいても聞きつける|エコーのたびに大きく、速くなる"],"hint1":["Glisse pour avancer|Touche pour lancer un écho|L'écho révèle les murs… et attire les Ombres","Slide to move|Tap to send an echo|Echoes reveal the walls… and draw the Shadows","Desliza para avanzar|Toca para lanzar un eco|El eco revela los muros… y atrae a las Sombras","Wischen zum Bewegen|Tippen für ein Echo|Das Echo zeigt die Wände… und lockt die Schatten an","Scorri per muoverti|Tocca per lanciare un'eco|L'eco rivela i muri… e attira le Ombre","Deslize para andar|Toque para lançar um eco|O eco revela as paredes… e atrai as Sombras","スライドで移動|タップでエコーを放つ|エコーは壁を照らす…そして影を呼ぶ"],"hint2":["Maintiens, puis glisse et relâche : écho dirigé|Il porte plus loin et fait moins de bruit|Bouton doré en bas à droite : lance un leurre","Hold, then slide and release: aimed echo|It reaches farther and makes less noise|Gold button, bottom right: throw a decoy","Mantén, desliza y suelta: eco dirigido|Llega más lejos y hace menos ruido|Botón dorado abajo a la derecha: lanza un señuelo","Halten, wischen, loslassen: gezieltes Echo|Es reicht weiter und ist leiser|Goldener Knopf unten rechts: Köder werfen","Tieni premuto, scorri e rilascia: eco direzionale|Arriva più lontano e fa meno rumore|Pulsante dorato in basso a destra: lancia un'esca","Segure, deslize e solte: eco direcionado|Vai mais longe e faz menos barulho|Botão dourado embaixo à direita: lance uma isca","長押し→スライド→離す：指向性エコー|遠くまで届き、音も小さい|右下の金色ボタン：おとりを投げる"],"hint3":["Murs fissurés : un écho tout proche les brise|…mais le fracas s'entend de loin|La Patrouilleuse (rose) est sourde mais ne dévie jamais","Cracked walls: a close echo shatters them|…but the crash carries far|The Patroller (pink) is deaf but never strays","Muros agrietados: un eco muy cercano los rompe|…pero el estruendo se oye a lo lejos|La Patrullera (rosa) es sorda pero nunca se desvía","Rissige Wände: ein nahes Echo zerbricht sie|…doch das Krachen hört man weit|Die Wächterin (rosa) ist taub, weicht aber nie ab","Muri crepati: un'eco vicina li distrugge|…ma il fragore si sente da lontano|La Pattugliatrice (rosa) è sorda ma non devia mai","Paredes rachadas: um eco bem perto as quebra|…mas o estrondo se ouve de longe|A Patrulheira (rosa) é surda, mas nunca se desvia","ひび割れた壁：近くのエコーで砕ける|…だが崩れる音は遠くまで響く|巡回者（ピンク）は耳が聞こえないが道を外れない"],"hint4":["Bouton bleu en bas à gauche : pose une balise|Elle éclaire en permanence… et attire les Rôdeuses|Une Rôdeuse qui l'atteint l'éteint","Blue button, bottom left: drop a beacon|It shines for good… and lures the Prowlers|A Prowler that reaches it puts it out","Botón azul abajo a la izquierda: coloca una baliza|Ilumina siempre… y atrae a las Acechadoras|Una Acechadora que la alcanza la apaga","Blauer Knopf unten links: Leuchtfeuer setzen|Es leuchtet dauerhaft… und lockt die Pirscherinnen an|Erreicht eine Pirscherin es, erlischt es","Pulsante blu in basso a sinistra: posa un faro|Illumina per sempre… e attira le Predatrici|Una Predatrice che lo raggiunge lo spegne","Botão azul embaixo à esquerda: coloque um farol|Ele ilumina para sempre… e atrai as Espreitadoras|Uma Espreitadora que o alcança o apaga","左下の青いボタン：ビーコンを置く|ずっと光る…そして徘徊者を引き寄せる|徘徊者がたどり着くと消されてしまう"],"hint5":["L'Aveugle (orange) n'entend pas tes échos|Elle sent tes mouvements : fige-toi quand elle approche","The Blind One (orange) can't hear your echoes|It feels your movements: freeze when it's near","La Ciega (naranja) no oye tus ecos|Siente tus movimientos: quédate quieto si se acerca","Die Blinde (orange) hört deine Echos nicht|Sie spürt deine Bewegungen: erstarre, wenn sie naht","La Cieca (arancione) non sente le tue eco|Sente i tuoi movimenti: immobilizzati quando si avvicina","A Cega (laranja) não ouve seus ecos|Ela sente seus movimentos: fique imóvel quando chegar perto","盲目の影（オレンジ）はエコーを聞かない|動きを感じ取る：近づいたら止まれ"],"hint6":["Deux étages : trouve l'escalier pour descendre|Les pas étouffés viennent de l'autre étage","Two floors: find the stairs to go down|Muffled footsteps come from the other floor","Dos plantas: encuentra la escalera para bajar|Los pasos amortiguados vienen de la otra planta","Zwei Etagen: finde die Treppe nach unten|Gedämpfte Schritte kommen von der anderen Etage","Due piani: trova la scala per scendere|I passi attutiti vengono dall'altro piano","Dois andares: encontre a escada para descer|Os passos abafados vêm do outro andar","2つのフロア：階段を見つけて下りよう|くぐもった足音は別のフロアから"],"hint7":["Le Reflet rejoue tes pas, 6 secondes plus tard|Ne reviens jamais trop vite sur ton chemin","The Reflection replays your steps, 6 seconds later|Never double back too quickly","El Reflejo repite tus pasos 6 segundos después|Nunca vuelvas atrás demasiado rápido","Das Spiegelbild wiederholt deine Schritte 6 Sekunden später|Kehre nie zu schnell um","Il Riflesso ripete i tuoi passi 6 secondi dopo|Non tornare mai indietro troppo in fretta","O Reflexo repete seus passos 6 segundos depois|Nunca volte pelo caminho rápido demais","映し身は6秒遅れで足取りをなぞる|来た道をすぐに引き返すな"],"sMenu":["Menu","Menu","Menú","Menü","Menu","Menu","メニュー"],"sOptions":["Options","Options","Opciones","Optionen","Opzioni","Opções","オプション"],"sEasyOn":["Mode facile activé","Easy mode on","Modo fácil activado","Leichter Modus an","Modalità facile attivata","Modo fácil ativado","イージーモード、オン"],"sEasyOff":["Mode facile désactivé","Easy mode off","Modo fácil desactivado","Leichter Modus aus","Modalità facile disattivata","Modo fácil desativado","イージーモード、オフ"],"sRealOn":["Échos réalistes activés","Realistic echoes on","Ecos realistas activados","Realistische Echos an","Eco realistiche attivate","Ecos realistas ativados","リアルなエコー、オン"],"sRealOff":["Échos réalistes désactivés","Realistic echoes off","Ecos realistas desactivados","Realistische Echos aus","Eco realistiche disattivate","Ecos realistas desativados","リアルなエコー、オフ"],"sAudioOn":["Mode audio activé. Au menu, touche le haut de l'écran pour jouer.","Audio mode on. In the menu, tap the top of the screen to play.","Modo audio activado. En el menú, toca la parte superior de la pantalla para jugar.","Audiomodus an. Tippe im Menü oben auf den Bildschirm, um zu spielen.","Modalità audio attivata. Nel menu, tocca la parte alta dello schermo per giocare.","Modo áudio ativado. No menu, toque no topo da tela para jogar.","オーディオモード、オン。メニューでは画面の上部をタップするとプレイできます。"],"sAudioOff":["Mode audio désactivé","Audio mode off","Modo audio desactivado","Audiomodus aus","Modalità audio disattivata","Modo áudio desativado","オーディオモード、オフ"],"sGyroOn":["Gyroscope activé","Tilt control on","Giroscopio activado","Neigungssteuerung an","Giroscopio attivato","Giroscópio ativado","傾き操作、オン"],"sGyroOff":["Gyroscope désactivé","Tilt control off","Giroscopio desactivado","Neigungssteuerung aus","Giroscopio disattivato","Giroscópio desativado","傾き操作、オフ"],"sDaily":["Défi du jour.","Daily challenge.","Reto diario.","Tagesaufgabe.","Sfida del giorno.","Desafio do dia.","デイリーチャレンジ。"],"sLevel":["Niveau {0}.","Level {0}.","Nivel {0}.","Level {0}.","Livello {0}.","Nível {0}.","レベル{0}。"],"sBoss":["La Mère des Ombres.","The Mother of Shadows.","La Madre de las Sombras.","Die Mutter der Schatten.","La Madre delle Ombre.","A Mãe das Sombras.","影の母。"],"sTwoFloors":["Deux étages.","Two floors.","Dos plantas.","Zwei Etagen.","Due piani.","Dois andares.","2つのフロア。"],"sTutorial":["Les sons doux indiquent les passages ouverts : à gauche, à droite, aigu vers le haut, grave vers le bas. Le carillon vient de la sortie. Touche pour lancer un écho.","Soft tones mark open passages: left, right, high pitch for up, low pitch for down. The chime comes from the exit. Tap to send an echo.","Los tonos suaves marcan los pasos abiertos: izquierda, derecha, agudo hacia arriba, grave hacia abajo. La campanilla viene de la salida. Toca para lanzar un eco.","Sanfte Töne zeigen offene Gänge: links, rechts, hoch für oben, tief für unten. Das Glockenspiel kommt vom Ausgang. Tippe für ein Echo.","I suoni morbidi indicano i passaggi aperti: sinistra, destra, acuto verso l'alto, grave verso il basso. Il carillon viene dall'uscita. Tocca per lanciare un'eco.","Tons suaves indicam passagens abertas: esquerda, direita, agudo para cima, grave para baixo. O sino vem da saída. Toque para lançar um eco.","やわらかい音が開いた通路を示します。左、右、高い音は上、低い音は下。チャイムは出口から聞こえます。タップでエコーを放ちます。"],"sShard":["Éclat","Shard","Fragmento","Splitter","Frammento","Fragmento","かけら"],"sDown":["Étage inférieur","Lower floor","Planta inferior","Untere Etage","Piano inferiore","Andar de baixo","下のフロア"],"sUp":["Étage supérieur","Upper floor","Planta superior","Obere Etage","Piano superiore","Andar de cima","上のフロア"],"sDailyWin":["Défi réussi. Score {0}. Touche pour revenir au menu.","Challenge complete. Score {0}. Tap to return to the menu.","Reto superado. Puntuación {0}. Toca para volver al menú.","Aufgabe geschafft. {0} Punkte. Tippe, um zum Menü zurückzukehren.","Sfida superata. Punteggio {0}. Tocca per tornare al menu.","Desafio concluído. Pontuação {0}. Toque para voltar ao menu.","チャレンジ達成。スコア{0}。タップでメニューに戻ります。"],"sClearOne":["Sortie trouvée. 1 étoile. Touche pour continuer.","Exit found. 1 star. Tap to continue.","Salida encontrada. 1 estrella. Toca para continuar.","Ausgang gefunden. 1 Stern. Tippe zum Weitermachen.","Uscita trovata. 1 stella. Tocca per continuare.","Saída encontrada. 1 estrela. Toque para continuar.","出口を発見。星1つ。タップで続行。"],"sClearMany":["Sortie trouvée. {0} étoiles. Touche pour continuer.","Exit found. {0} stars. Tap to continue.","Salida encontrada. {0} estrellas. Toca para continuar.","Ausgang gefunden. {0} Sterne. Tippe zum Weitermachen.","Uscita trovata. {0} stelle. Tocca per continuare.","Saída encontrada. {0} estrelas. Toque para continuar.","出口を発見。星{0}つ。タップで続行。"],"sBeaconPlaced":["Balise posée","Beacon placed","Baliza colocada","Leuchtfeuer gesetzt","Faro posato","Farol colocado","ビーコン設置"],"sBeaconOut":["Balise éteinte","Beacon out","Baliza apagada","Leuchtfeuer erloschen","Faro spento","Farol apagado","ビーコンが消えた"],"sDead":["L'Ombre t'a trouvé. Touche pour réessayer.","The Shadow found you. Tap to try again.","La Sombra te encontró. Toca para reintentar.","Der Schatten hat dich erwischt. Tippe zum Wiederholen.","L'Ombra ti ha trovato. Tocca per riprovare.","A Sombra te achou. Toque para tentar de novo.","影に見つかった。タップで再挑戦。"]}};
 // </i18n:auto>
+// <defi:i18n> textes du défi du jour, hors bloc généré : à reporter dans i18n/strings.json au portage Android
+const I18N_DEFI = {"defiAFaire":["#{0} · à faire","#{0} · to do","#{0} · pendiente","#{0} · offen","#{0} · da fare","#{0} · a fazer","#{0} · 未挑戦"],"defiFait":["#{0} · fait ✓ · {1}","#{0} · done ✓ · {1}","#{0} · hecho ✓ · {1}","#{0} · erledigt ✓ · {1}","#{0} · fatta ✓ · {1}","#{0} · feito ✓ · {1}","#{0} · クリア ✓ · {1}"],"defiSerie":["Jours de suite : {0} (record {1})","Days in a row: {0} (best {1})","Días seguidos: {0} (récord {1})","Tage in Folge: {0} (Rekord {1})","Giorni di fila: {0} (record {1})","Dias seguidos: {0} (recorde {1})","連続日数：{0}（最高 {1}）"],"defiSerieTxt":["{0} jours de suite","{0} days in a row","{0} días seguidos","{0} Tage in Folge","{0} giorni di fila","{0} dias seguidos","{0}日連続"],"defiProchain":["Prochain défi dans {0} h {1}","Next challenge in {0}h {1}m","Próximo reto en {0} h {1} min","Nächste Aufgabe in {0} Std. {1} Min.","Prossima sfida tra {0} h {1} min","Próximo desafio em {0} h {1} min","次のチャレンジまで {0}時間{1}分"],"defiDetail":["⏱ {0} · {1} échos","⏱ {0} · {1} echoes","⏱ {0} · {1} ecos","⏱ {0} · {1} Echos","⏱ {0} · {1} eco","⏱ {0} · {1} ecos","⏱ {0} · エコー {1}"],"defiPartager":["Partager le résultat","Share the result","Compartir el resultado","Ergebnis teilen","Condividi il risultato","Compartilhar o resultado","結果をシェア"],"defiPartage":["Résultat partagé","Result shared","Resultado compartido","Ergebnis geteilt","Risultato condiviso","Resultado compartilhado","結果をシェアしました"],"defiCopie":["Résultat copié","Result copied","Resultado copiado","Ergebnis kopiert","Risultato copiato","Resultado copiado","結果をコピーしました"],"defiManuel":["Copie le texte ci-dessous","Copy the text below","Copia el texto de abajo","Kopiere den Text unten","Copia il testo qui sotto","Copie o texto abaixo","下のテキストをコピーしてください"],"defiCopieLabel":["Texte du résultat","Result text","Texto del resultado","Ergebnistext","Testo del risultato","Texto do resultado","結果のテキスト"],"defiResume":["Défi {0} réussi, score {1}, série de {2} jours","Challenge {0} complete, score {1}, {2}-day streak","Reto {0} superado, puntuación {1}, racha de {2} días","Aufgabe {0} geschafft, {1} Punkte, Serie von {2} Tagen","Sfida {0} superata, punteggio {1}, serie di {2} giorni","Desafio {0} concluído, pontuação {1}, sequência de {2} dias","チャレンジ{0}達成、スコア{1}、{2}日連続"],"sDefiFin":["Défi réussi. Score {0}. Série de {1} jours. Touche pour revenir au menu, ou appuie sur P pour partager.","Challenge complete. Score {0}. {1}-day streak. Tap to return to the menu, or press P to share.","Reto superado. Puntuación {0}. Racha de {1} días. Toca para volver al menú o pulsa P para compartir.","Aufgabe geschafft. {0} Punkte. Serie von {1} Tagen. Tippe, um zum Menü zurückzukehren, oder drücke P zum Teilen.","Sfida superata. Punteggio {0}. Serie di {1} giorni. Tocca per tornare al menu o premi P per condividere.","Desafio concluído. Pontuação {0}. Sequência de {1} dias. Toque para voltar ao menu ou aperte P para compartilhar.","チャレンジ達成。スコア{0}。{1}日連続。タップでメニューに戻ります。Pキーでシェアできます。"]};
+// </defi:i18n>
+Object.assign(I18N.t, I18N_DEFI);
 let lang = 1;
 // Texte traduit ; {0}, {1}… remplacés par les arguments
 const L = (key, ...a) => { let r = (I18N.t[key] || [])[lang] || key; a.forEach((v, i) => { r = r.split('{' + i + '}').join(String(v)); }); return r; };
@@ -377,10 +405,10 @@ resize();
 // =====================================================================
 // État du jeu
 // =====================================================================
-let state = TITLE, t = 0, stateT = 0, level = 1, dailyMode = false, dailySeed = todaySeed();
+let state = TITLE, t = 0, stateT = 0, level = 1, dailyMode = false, defiJour = Defi.today(), dailySeed = Defi.seed('echo', defiJour.key);
 let easy = store.get('easy', false), realistic = store.get('realistic', false), audioMode = store.get('audio', false);
 let gyro = store.get('gyro', false) && tilt.available;
-let best = store.get('best', 0), totalStars = 0, dailyBest = store.get('daily_' + dailySeed, 0);
+let best = store.get('best', 0), totalStars = 0, dailyBest = store.get('daily_' + defiJour.num, 0);
 let floors = [], floorIdx = 0, reflet = null;
 let cur = null, maze = null, walls = [], hunters = [], shards = [];
 let pulses = [], decoys = [], particles = [], scheduled = [];
@@ -401,7 +429,6 @@ const realOn = () => realistic && !dailyMode;
 const isBoss = () => !dailyMode && level % 10 === 0;
 function setFloor(i) { floorIdx = i; cur = floors[i]; maze = cur.maze; walls = cur.walls; hunters = cur.hunters; shards = cur.shards; }
 
-function todaySeed() { const d = new Date(); return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate(); }
 function sumStars() { let s = 0; for (let l = 1; l <= best + 1; l++) s += store.get('stars_' + l, 0); return s; }
 function say(s) { if (audioMode) speech.say(s); }
 
@@ -460,7 +487,9 @@ cv.addEventListener('pointercancel', e => release(e, true));
 cv.addEventListener('contextmenu', e => e.preventDefault());
 
 addEventListener('keydown', e => {
+  if (e.target && e.target.closest && e.target.closest('#defiFin')) return;
   const k = e.key.toLowerCase();
+  if (state === CLEAR && dailyMode && k === 'p') { if (!e.repeat) partager(); return; }
   if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(k)) e.preventDefault();
   sound.init();
   if (e.repeat) return;
@@ -490,7 +519,7 @@ addEventListener('popstate', () => {
   if (state !== TITLE) input.back = true;
 });
 function goTitle() {
-  state = TITLE; stateT = t;
+  state = TITLE; stateT = t; defiPanneau(false); majAccueil();
   if (histPushed) { histPushed = false; ignorePop = true; try { history.back(); } catch (e) {} }
 }
 
@@ -558,6 +587,7 @@ function addHunter(f, type, c0, gen) {
 }
 
 function startLevel() {
+  defiPanneau(false);
   const gen = dailyMode ? mulberry32(dailySeed) : mulberry32((Math.random() * 2 ** 31) | 0);
   const boss = isBoss();
   const twoFloors = !dailyMode && !boss && level >= 6 && level % 2 === 0;
@@ -694,7 +724,9 @@ function titleButtons() {
 }
 function titleAction(k) {
   if (k === 0) { dailyMode = false; level = 1; startLevel(); }
-  else if (k === 1) { dailyMode = true; dailySeed = todaySeed(); dailyBest = store.get('daily_' + dailySeed, 0); startLevel(); }
+  else if (k === 1) { // défi figé au lancement : une partie commencée à 23 h 59 reste celle de ce jour
+    dailyMode = true; defiJour = Defi.today(); dailySeed = Defi.seed('echo', defiJour.key); dailyBest = store.get('daily_' + defiJour.num, 0); startLevel();
+  }
   else if (k === 2) { state = OPTIONS; stateT = t; pushGameHistory(); say(L('sOptions')); }
   else if (k === 3 && installEvt) { installEvt.prompt(); installEvt.userChoice.finally(() => { installEvt = null; }); }
   haptics.tick();
@@ -889,8 +921,13 @@ function clearLevel() {
   if (dailyMode) {
     dailyTime = t - levelStartT;
     dailyScore = max(0, Math.floor(10000 - dailyTime * 40 - echoesUsed * 120 + shardsTaken * 400));
-    if (dailyScore > dailyBest) { dailyBest = dailyScore; newRecord = true; store.set('daily_' + dailySeed, dailyBest); }
-    say(L('sDailyWin', dailyScore));
+    if (dailyScore > dailyBest) { dailyBest = dailyScore; newRecord = true; store.set('daily_' + defiJour.num, dailyBest); }
+    // 1er appel : série du jour ; 2e : même jour, ne range que le texte qui contient cette série
+    defiSt = Defi.record('echo', defiJour, dailyScore, '');
+    defiTexte = texteDefi(defiSt.count);
+    defiSt = Defi.record('echo', defiJour, dailyScore, defiTexte);
+    defiPanneau(true);
+    say(L('sDefiFin', nombre(dailyScore), defiSt.count));
   } else {
     stars = echoesUsed <= par3 ? 3 : echoesUsed <= par2 ? 2 : 1;
     if (stars > store.get('stars_' + level, 0)) store.set('stars_' + level, stars);
@@ -1281,9 +1318,11 @@ function render() {
   renderHud();
   if (state === DEAD) renderOverlay(L('deadTitle'), COL.RED, null, [L('retry')]);
   else if (state === CLEAR) {
-    if (dailyMode) renderOverlay(L('dailyWin'), COL.GOLD, null, [
+    if (dailyMode) { const r = avantProchain(); renderOverlay(L('dailyWin'), COL.GOLD, null, [
       L('dailyLine', formatTime(dailyTime), echoesUsed, shardsTaken, shardsTotal),
-      L('score', dailyScore) + (newRecord ? L('newRecord') : L('recordWas', dailyBest)), '', L('toMenu')]);
+      L('score', dailyScore) + (newRecord ? L('newRecord') : L('recordWas', dailyBest)),
+      L('defiSerie', defiSt.count, defiSt.best), L('defiProchain', Math.floor(r / 3600000), String(Math.floor(r % 3600000 / 60000)).padStart(2, '0')),
+      '', L('toMenu')], 0.2); }
     else renderOverlay(L('clearTitle'), COL.GOLD, stars, [L('clearLine', level, echoesUsed, par3), '', L('deeper')]);
   }
   ctx.globalAlpha = 1;
@@ -1533,11 +1572,11 @@ function renderHud() {
   ctx.globalAlpha = 1;
 }
 
-function renderOverlay(title, col, starCount, lines) {
+function renderOverlay(title, col, starCount, lines, top = 0.42) {
   const a = min(1, (t - stateT) * 1.5);
   ctx.globalAlpha = a * 0.6; ctx.fillStyle = COL.BLACK; ctx.fillRect(0, 0, vw, vh);
-  text(title, vw / 2, vh * 0.42, 24, col, a, 'center', 0.3);
-  let y = vh * 0.42 + 34;
+  text(title, vw / 2, vh * top, 24, col, a, 'center', 0.3);
+  let y = vh * top + 34;
   if (starCount !== null) {
     for (let k = 0; k < 3; k++) {
       const sa = clamp((t - stateT - 0.3 - k * 0.25) / 0.2, 0, 1);
@@ -1571,10 +1610,15 @@ function renderTitle() {
 
   const info = [];
   if (best > 0) info.push([L('record', best, totalStars), COL.WHITE, 0.5]);
-  if (dailyBest > 0) info.push([L('dailyRecord', dailyBest), COL.WHITE, 0.5]);
+  if (!accueil || Defi.parisDate().num !== accueil.j.num) majAccueil(); // minuit de Paris passé pendant l'accueil
+  info.push([accueil.fait ? L('defiFait', accueil.j.n, nombre(accueil.score)) : L('defiAFaire', accueil.j.n), COL.GOLD, 0.85, accueil.serie]);
   info.push([audioMode ? L('audioMenuHint') : L('headphones'), COL.GOLD, 0.67]);
   if (!matchMedia('(pointer: coarse)').matches) info.push([L('keyboard'), COL.CYAN, 0.45]);
-  info.forEach((l, k) => text(l[0], cx, vh * 0.88 + k * 18, 11, l[1], l[2], 'center', 0.1));
+  info.forEach((l, k) => {
+    const y = vh * 0.88 + k * 18, suite = l[3] > 0 ? '      ' + l[3] : '';
+    text(l[0] + suite, cx, y, 11, l[1], l[2], 'center', 0.1);
+    if (suite) { const w = ctx.measureText(l[0] + suite).width; flamme(cx - w / 2 + ctx.measureText(l[0] + '   ').width, y - 4, 5.5, l[2]); }
+  });
   ctx.globalAlpha = 1;
 }
 
@@ -1602,6 +1646,64 @@ function renderOptions() {
   }
   text(L('dailyNote'), vw / 2, vh * 0.96, 11, COL.WHITE, 0.43, 'center', 0.03);
   ctx.globalAlpha = 1;
+}
+
+// =====================================================================
+// Défi du jour (logique commune dans defi.js)
+// =====================================================================
+const URL_JEU = 'https://aulit42369.github.io/Echo/';
+const calme = matchMedia('(prefers-reduced-motion: reduce)');
+const el = id => document.getElementById(id);
+let accueil = null, defiSt = { count: 0, best: 0 }, defiTexte = '';
+function nombre(n) { return n.toLocaleString(I18N.langs[lang].tts); }
+function majAccueil() {
+  const j = Defi.today(), st = Defi.load('echo'), fait = Defi.aJoue('echo', j);
+  accueil = { j, fait, score: fait ? st.jours[j.key].score : 0, serie: Defi.serie('echo', j) };
+}
+/** ms jusqu'au prochain minuit de Paris (décalage 1 h l'hiver, 2 h l'été). */
+function avantProchain() {
+  const now = Date.now(), J = 86400000;
+  for (const o of [1, 2]) {
+    const m = now + o * 3600000, minuit = m - m % J + J - o * 3600000;
+    if (Defi.parisDate(minuit).num !== Defi.parisDate(minuit - 1).num) return minuit - now;
+  }
+  return 0;
+}
+function texteDefi(serie) {
+  const sec = Math.floor(dailyTime);
+  return Defi.shareText({ nom: 'ÉCHO', n: defiJour.n, emoji: '🦇', score: nombre(dailyScore),
+    lignes: Defi.grid(floors.flatMap(f => f.shards).map(s => s.taken ? 1 : 0), ['▫️', '💎']),
+    detail: L('defiDetail', Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0'), echoesUsed),
+    serie, libelleSerie: L('defiSerieTxt'), url: URL_JEU });
+}
+function defiPanneau(on) {
+  el('defiFin').hidden = !on;
+  if (!on) return;
+  el('defiPartager').textContent = L('defiPartager');
+  el('defiApercu').textContent = defiTexte;
+  el('defiApercu').setAttribute('aria-label', L('defiResume', defiJour.n, nombre(dailyScore), defiSt.count));
+  el('defiLabel').textContent = L('defiCopieLabel');
+  el('defiEtat').textContent = ''; el('defiCopie').hidden = true;
+}
+let partageEnCours = false; // un seul partage à la fois (double clic, touche P répétée)
+function partager() {
+  if (partageEnCours) return;
+  partageEnCours = true;
+  Defi.share(defiTexte).finally(() => { partageEnCours = false; }).then(r => {
+    if (!r) return; // partage annulé
+    const msg = L(r === 'partage' ? 'defiPartage' : r === 'copie' ? 'defiCopie' : 'defiManuel');
+    el('defiEtat').textContent = msg; say(msg);
+    if (r === 'manuel') { el('defiCopie').hidden = false; el('defiTexte').value = defiTexte; el('defiTexte').focus(); el('defiTexte').select(); }
+  });
+}
+el('defiPartager').addEventListener('click', partager);
+/** Picto de série : petite flamme dans la palette du jeu (pas d'emoji dans l'interface). */
+function flamme(x, y, s, a) {
+  const k = calme.matches ? 1 : 1 + 0.08 * sin(t * 7), h = s * k;
+  const goutte = (r, hh) => { ctx.beginPath(); ctx.moveTo(x, y - hh); ctx.bezierCurveTo(x + r, y - hh * 0.2, x + r * 0.75, y + r, x, y + r);
+    ctx.bezierCurveTo(x - r * 0.75, y + r, x - r, y - hh * 0.2, x, y - hh); ctx.fill(); };
+  ctx.globalAlpha = a; ctx.fillStyle = COL.ORANGE; goutte(s * 0.8, h * 1.3);
+  ctx.fillStyle = COL.GOLD; goutte(s * 0.4, h * 0.6);
 }
 
 // =====================================================================
