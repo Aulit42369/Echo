@@ -10,16 +10,24 @@ const racine = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(racine, 'index.html'), 'utf8');
 const sw = fs.readFileSync(path.join(racine, 'sw.js'), 'utf8');
 
-function textesDefi() {
-  const m = html.match(/const I18N_DEFI = (\{.*\});\r?\n\/\/ <\/defi:i18n>/);
-  assert.ok(m, 'bloc I18N_DEFI introuvable');
-  return JSON.parse(m[1]);
+// Depuis le 25/10/2026, tous les textes (défi compris) viennent du bloc généré depuis i18n/strings.json.
+function textes() {
+  const m = html.match(/const I18N = (\{.*\});\r?\n\/\/ <\/i18n:auto>/);
+  assert.ok(m, 'bloc <i18n:auto> introuvable');
+  return JSON.parse(m[1]).t;
 }
+const CLES_DEFI = ['defiAFaire', 'defiFait', 'defiSerie', 'defiSerieTxt', 'defiProchain', 'defiDetail', 'defiPartager', 'defiPartage',
+  'defiCopie', 'defiManuel', 'defiCopieLabel', 'defiResume', 'sDefiFin', 'defiImage', 'defiImageOk', 'defiImageErr',
+  'legal', 'autresBouton', 'autresTitre', 'autresLumen', 'autresFragments', 'autresResonance', 'autresOuvrir'];
+function textesDefi() { const T = textes(); return Object.fromEntries(CLES_DEFI.map(k => [k, T[k]])); }
 const nbLangues = (html.match(/"langs":\[(.*?)\]/)[1].match(/"code"/g) || []).length;
 
-test('service worker : version echo-v1.8 et defi.js en cache', () => {
-  assert.match(sw, /const VERSION = 'echo-v1.8';/);
-  assert.ok(sw.includes("'./defi.js'"));
+test('service worker : version echo-v1.9, modules en cache', () => {
+  assert.match(sw, /const VERSION = 'echo-v1.9';/);
+  for (const f of ['defi.js', 'share-card.js', 'autres-jeux.js']) {
+    assert.ok(sw.includes("'./" + f + "'"), f + ' en cache');
+    assert.ok(html.includes('<script src="' + f + '"></script>'), f + ' chargé');
+  }
   assert.ok(sw.includes("k.startsWith('echo-')"), 'le SW ne supprime que ses caches');
 });
 
@@ -44,8 +52,8 @@ test('textes du défi traduits dans toutes les langues, mêmes marqueurs', () =>
     assert.equal(tr.length, nbLangues, cle);
     const ref = (tr[0].match(/\{\d\}/g) || []).sort().join();
     tr.forEach((s, i) => { assert.ok(s, cle + ' vide [' + i + ']'); assert.equal((s.match(/\{\d\}/g) || []).sort().join(), ref, cle + ' [' + i + ']'); });
-    assert.ok(!html.match(/"t":\{.*?\}\};/s)[0].includes('"' + cle + '"'), cle + ' en double avec le bloc généré');
   }
+  assert.ok(!html.includes('I18N_DEFI') && !html.includes('Object.assign(I18N.t'), 'plus de textes écrits à la main hors du bloc généré');
   for (const cle of ['defiPartager', 'defiPartage', 'defiCopie', 'defiManuel', 'defiSerie', 'defiProchain', 'sDefiFin'])
     assert.ok(html.includes("'" + cle + "'"), cle + ' inutilisé');
 });
