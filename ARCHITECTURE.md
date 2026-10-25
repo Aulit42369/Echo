@@ -36,7 +36,7 @@ Aucun secret, aucun réseau, aucune donnée personnelle. Le texte partagé ne co
 ## 5. Identité
 - URL : `https://aulit42369.github.io/Echo/` (**écart connu** : domaine partagé, contraire à la règle « un domaine par app » ; ne pas changer sans décision).
 - `id` du manifest : `/Echo/` — **ne jamais modifier**. `start_url` / `scope` : `./`.
-- Cache : préfixe `echo-` (actuel `echo-v1.7`) ; le SW ne supprime que les caches `echo-*`.
+- Cache : préfixe `echo-` (actuel `echo-v1.8`) ; le SW ne supprime que les caches `echo-*`.
 - Nom de jeu pour la graine du défi : `'echo'`.
 
 ## 6. Dépendances externes

@@ -9,6 +9,7 @@
 - 24/10 : correction relecture — touche P maintenue sur l'écran de fin du défi : répétitions ignorées et un seul partage à la fois (`partageEnCours`), plus de faux « Résultat copié » pendant que la fenêtre de partage est ouverte (17 tests).
 
 - 25/10 : checklist « avant lancement » : `privacy.html` complétée dans les 7 langues (cookies, partage, conditions d'utilisation, mentions légales, contact = tickets GitHub au lieu de `CONTACT_EMAIL`), lien « Confidentialité · conditions » sur l'écran Options, titre + description + Open Graph + `og-image.png` 1200×630, `404.html` dans le style du jeu, `sitemap.xml`, contraste AA des petits textes du canvas (options inactives, note du défi, aide clavier, libellé mode audio), cache `echo-v1.7`.
+- 25/10 : passe SEO éditoriale (requête « jeu de labyrinthe dans le noir ») : `<title>`, description, Open Graph alignés ; `<h1>` masqué visuellement (lecteurs d'écran et moteurs) + paragraphe `<noscript>` ; données structurées `VideoGame` (gratuit, Android + web, 7 langues) en fin de `<body>` ; cache `echo-v1.8`.
 
 ## En cours
 - Rien.

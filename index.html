@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>ÉCHO — labyrinthe dans le noir, guidé par l'écho</title>
-<meta name="description" content="Dans le noir, seul l'écho te guide. Lance un écho pour révéler les murs et échappe aux Ombres : jeu de labyrinthe sonore gratuit, jouable hors ligne.">
+<title>Jeu de labyrinthe dans le noir, guidé par l'écho | ÉCHO</title>
+<meta name="description" content="Jeu de labyrinthe dans le noir : lance un écho pour révéler les murs et échappe aux Ombres. Jeu sonore gratuit sur Android et navigateur, jouable hors ligne.">
 <meta name="theme-color" content="#05070a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,8 +17,8 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ÉCHO">
 <meta property="og:locale" content="fr_FR">
-<meta property="og:title" content="ÉCHO — labyrinthe dans le noir">
-<meta property="og:description" content="Dans le noir, seul l'écho te guide. Lance un écho pour révéler les murs et échappe aux Ombres : jeu de labyrinthe sonore gratuit, jouable hors ligne.">
+<meta property="og:title" content="Jeu de labyrinthe dans le noir, guidé par l'écho | ÉCHO">
+<meta property="og:description" content="Jeu de labyrinthe dans le noir : lance un écho pour révéler les murs et échappe aux Ombres. Jeu sonore gratuit sur Android et navigateur, jouable hors ligne.">
 <meta property="og:url" content="https://aulit42369.github.io/Echo/">
 <meta property="og:image" content="https://aulit42369.github.io/Echo/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -42,6 +42,7 @@
     color: rgba(255, 255, 255, .72); font: 300 11px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: .18em;
     text-transform: uppercase; text-decoration: none; white-space: nowrap; }
   #lienLegal[hidden] { display: none; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   #lienLegal:focus-visible { outline: 2px solid #5cf2ff; outline-offset: 2px; border-radius: 6px; }
   #defiApercu { margin: 0; padding: 12px 16px; border: 1px solid rgba(255, 201, 77, .3); border-radius: 18px;
     background: rgba(5, 7, 10, .86); box-shadow: inset 0 0 22px rgba(92, 242, 255, .06);
@@ -58,6 +59,8 @@
 </style>
 </head>
 <body>
+<h1 class="sr">ÉCHO, jeu de labyrinthe dans le noir</h1>
+<noscript><p style="position:relative;z-index:3;max-width:34em;margin:0 auto;padding:24px;font:16px/1.5 system-ui,sans-serif;color:#fff">ÉCHO est un jeu de labyrinthe dans le noir : lance un écho pour révéler les murs, écoute les sons et échappe aux Ombres. Jeu sonore gratuit, jouable hors ligne sur Android et dans le navigateur. Active JavaScript pour jouer.</p></noscript>
 <canvas id="echo" tabindex="0" aria-label="ÉCHO, jeu de labyrinthe dans le noir"></canvas>
 <a id="lienLegal" href="privacy.html" hidden></a>
 <div id="defiFin" hidden>
@@ -1762,6 +1765,47 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }
 })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "ÉCHO",
+  "url": "https://aulit42369.github.io/Echo/",
+  "description": "Jeu de labyrinthe dans le noir : lance un écho pour révéler les murs et échappe aux Ombres. Jeu sonore gratuit sur Android et navigateur, jouable hors ligne.",
+  "image": "https://aulit42369.github.io/Echo/og-image.png",
+  "inLanguage": [
+    "fr",
+    "en",
+    "es",
+    "de",
+    "it",
+    "pt",
+    "ja"
+  ],
+  "genre": [
+    "Labyrinthe",
+    "Jeu sonore",
+    "Arcade"
+  ],
+  "gamePlatform": [
+    "Android",
+    "Navigateur web"
+  ],
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Android, Web",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Aulit42369",
+    "url": "https://aulit42369.github.io/Site/"
+  }
+}
 </script>
 </body>
 </html>

@@ -17,8 +17,8 @@ function textesDefi() {
 }
 const nbLangues = (html.match(/"langs":\[(.*?)\]/)[1].match(/"code"/g) || []).length;
 
-test('service worker : version echo-v1.7 et defi.js en cache', () => {
-  assert.match(sw, /const VERSION = 'echo-v1\.7';/);
+test('service worker : version echo-v1.8 et defi.js en cache', () => {
+  assert.match(sw, /const VERSION = 'echo-v1.8';/);
   assert.ok(sw.includes("'./defi.js'"));
   assert.ok(sw.includes("k.startsWith('echo-')"), 'le SW ne supprime que ses caches');
 });

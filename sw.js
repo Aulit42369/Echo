@@ -1,6 +1,6 @@
 // ÉCHO — service worker : le jeu fonctionne hors ligne après la première visite.
 // Change VERSION à chaque mise à jour pour forcer le rafraîchissement du cache.
-const VERSION = 'echo-v1.7';
+const VERSION = 'echo-v1.8';
 const FILES = ['./', './index.html', './defi.js', './privacy.html', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png'];
 
