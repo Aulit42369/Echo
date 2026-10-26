@@ -21,11 +21,13 @@
   (vecteurs pour Android) : 33 tests. Android : `GameView.kt` (2 464 l.) découpé en 14 fichiers (≤ 344 l.), `GeometrieTest.kt` (14 tests JUnit).
 
 - 25/10 : adresse de contact **aulit42369@gmail.com** dans `privacy.html` (7 langues, lien `mailto:`, tickets GitHub en second choix), cache `echo-v2.1`. L'appli Android ouvre la page en ligne : rien à reconstruire. Pas de champ contact dans `fastlane` (adresse à saisir dans la Play Console, voir `PLAY_STORE.md`).
+- **26/10** : politique conforme LCEN/RGPD : mentions légales complètes (éditeur et directeur de la publication Aulit42369, personne physique non professionnelle anonyme, identité communiquée à l'hébergeur ; GitHub, Inc. avec adresse, téléphone, page de contact), transferts hors UE (DPF / clauses types) dans « Hébergement », contact et réclamation CNIL dans « Vos droits », ajout des rubriques « Avis sur le Play Store » (demande d'avis de l'appli Android) et « Tes droits », 7 langues, le français fait foi. Cache `echo-v2.2` (test `echo-defi` mis à jour). Lien de la politique laissé dans Options, comme LUMEN (Réglages) : en haut de l'accueil il chevaucherait le bouton « autres jeux » sur petit écran.
 
 ## En cours
 - Rien.
 
 ## À faire
+- Play Console : vérifier que la fiche « Sécurité des données » reste cohérente (aucune donnée collectée ; avis Google Play géré par Google).
 - Vérifier à l'œil la carte image (web et Android) sur téléphone : aucun rendu automatique possible dans les tests.
 - Quand LUMEN / Fragments / Résonance seront sur le Play Store : remplacer les liens de `JEUX` (`autres-jeux.js`) et `AutresJeux.JEUX` (Android).
 - Purger un jour les anciennes clés `echo_daily_*` (une par jour joué).

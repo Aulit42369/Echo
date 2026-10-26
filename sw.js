@@ -1,6 +1,6 @@
 // ÉCHO — service worker : le jeu fonctionne hors ligne après la première visite.
 // Change VERSION à chaque mise à jour pour forcer le rafraîchissement du cache.
-const VERSION = 'echo-v2.1';
+const VERSION = 'echo-v2.2';
 // Mêmes fichiers, même ordre que les balises de index.html (contrôlé par tests/chargement.test.js).
 const JEU = ['i18n', 'reglages', 'labyrinthe', 'sons', 'appareil', 'etat', 'entrees', 'niveau', 'logique', 'echos', 'ombres',
   'rendu', 'ecrans', 'defi-ecran', 'boucle'].map(n => './js/' + n + '.js');
