@@ -8,10 +8,17 @@
 
 ## PWA
 - Hébergement : GitHub Pages, `https://aulit42369.github.io/Echo/` (domaine partagé avec le site, écart connu).
-- `sw.js` : constante `VERSION` (`echo-v2.3` au 28/10/2026) à monter à chaque changement ; liste `JEU` = mêmes fichiers que les balises de `index.html` ; ne purge que les caches `echo-*`.
+- `sw.js` : constante `VERSION` (`echo-v2.4` au 28/10/2026) à monter à chaque changement ; liste `JEU` = mêmes fichiers que les balises de `index.html` ; ne purge que les caches `echo-*`.
 - Manifest : `id` `/Echo/` (ne jamais modifier), `start_url` / `scope` `./`.
-- CSP en balise meta : `script-src 'self'` (aucun script en ligne exécutable).
+- CSP en balise meta : `script-src 'self'` + empreinte `sha256` du seul script en ligne exécutable (compteur GoatCounter) + `https://gc.zgo.at` ; `connect-src`/`img-src` + `https://aulit42369.goatcounter.com`.
 - Pas de `robots.txt` possible (site de projet) : seul `sitemap.xml`.
+
+## Traceurs (28/10/2026)
+- Aucun cookie. Seul traceur : **GoatCounter**, mesure d'audience sans cookie (compte `aulit42369.goatcounter.com`, le même que le Site et la vitrine de La Cabane), chemins préfixés `/echo/…` (option `path`) pour distinguer le jeu dans le tableau de bord.
+- Script d'une ligne en fin de `index.html` : charge `count.v4.js` (version figée + SRI `sha384`, comme le Site) **seulement** si `location.hostname` se termine par `github.io` (jamais dans une appli Android, une WebView, `file://` ni en local) et si `localStorage.skipgc` ≠ `'t'`. Domaine partagé avec le Site (`aulit42369.github.io`) : la clé `skipgc` vaut pour les deux, et le chemin réel `/Echo/…` est réécrit en `/echo/…`.
+- CSP : empreinte `sha256` de ce script + `https://gc.zgo.at` dans `script-src`, `https://aulit42369.goatcounter.com` dans `connect-src` et `img-src`. Modifier le script = recalculer l'empreinte (`tests/statistiques.test.js` échoue sinon).
+- Le SW ignore les requêtes d'autres origines : `count.js` et les envois ne sont jamais mis en cache.
+- Opposition : bouton « Ne pas être compté » de `privacy.html` (toutes les langues), clé locale `skipgc` ; bouton masqué hors `github.io`.
 
 ## Android
 - Appli Kotlin native 1.4 (versionCode 5) : `F:\Stream\files\JEUX\Echo-PlayStore-1.1.0\Echo` (hors de ce dépôt). La clé de signature est dans `echo-release` (secret, jamais lu).

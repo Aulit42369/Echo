@@ -68,5 +68,6 @@ test('service worker : chaque css / js de la page est en cache hors ligne', () =
   const fichiers = [...feuilles(), ...scripts().filter(s => s.src).map(s => s.src)];
   assert.ok(fichiers.length >= 19, 'fichiers de la page : ' + fichiers.length);
   for (const f of fichiers) assert.ok(c.FILES.includes('./' + f), f + ' absent de sw.js');
-  assert.ok(!require('./page.js').html.includes('<script>'), 'plus aucun script en ligne (hors JSON-LD)');
+  // seule exception : le compteur GoatCounter d'une ligne (empreinte dans la CSP, vérifié par statistiques.test.js)
+  assert.ok(!require('./page.js').html.replace(/<script>[^<]*goatcounter[^<]*<\/script>/, '').includes('<script>'), 'plus aucun script en ligne (hors JSON-LD et GoatCounter)');
 });

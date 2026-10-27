@@ -31,3 +31,5 @@
 - **Géométrie partagée avec Android** (`segCross`, `segDist`, `losClear`, `wallVisible`, `wallInCone`, `farCell`, `Maze.bfs`) : un changement
   voulu fait échouer `tests/geometrie.test.js` → `MAJ_PARITE=1 node --test`, recopier `tests/geometrie-android.json` dans
   `app/src/test/resources/` et porter le changement dans `Geometrie.kt`.
+
+- **Compteur GoatCounter (28/10)** : script en ligne d'une ligne en fin de `index.html`, son empreinte `sha256` est dans la CSP : le modifier = recalculer l'empreinte (`tests/statistiques.test.js`). Ne jamais retirer la garde `github.io` : compter dans une appli Android obligerait à déclarer des analytics sur le Play Store. Garder `count.v4.js` + `integrity` (pas `count.js`), comme le Site.

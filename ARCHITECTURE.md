@@ -88,7 +88,7 @@ Aucun secret, aucun réseau, aucune donnée personnelle. Le texte partagé ne co
 ## 5. Identité
 - URL : `https://aulit42369.github.io/Echo/` (**écart connu** : domaine partagé, contraire à la règle « un domaine par app » ; ne pas changer sans décision).
 - `id` du manifest : `/Echo/` — **ne jamais modifier**. `start_url` / `scope` : `./`.
-- Cache : préfixe `echo-` (actuel `echo-v2.3`) ; le SW ne supprime que les caches `echo-*`.
+- Cache : préfixe `echo-` (actuel `echo-v2.4`) ; le SW ne supprime que les caches `echo-*`.
 - Nom du fichier image partagé : `echo-defi-<n>.png`.
 - Nom de jeu pour la graine du défi : `'echo'`.
 
@@ -111,3 +111,6 @@ Manuel : capture accueil + fin du défi (FR/EN), zéro erreur console, hors lign
 - Carte image : rendu visuel non vérifié automatiquement (pas de navigateur dans les tests) ; à contrôler à l'œil sur téléphone.
 - Lot 18 : les fonctions de haut niveau sont désormais globales (`window.alert` est masquée par la fonction `alert` des Ombres, sans effet : le jeu n'utilise pas la boîte native).
 - Voir `PIEGES.md`.
+
+## Statistiques de visite (28/10/2026)
+GoatCounter sans cookie, chemins `/echo/…`, chargé par le script d'une ligne en fin de `index.html` uniquement sur `*.github.io` et sans `skipgc` (détail : `docs/TRD.md`, section Traceurs). `privacy.html` le déclare dans toutes ses langues, avec le bouton « Ne pas être compté ». Test : `tests/statistiques.test.js` (identique dans les 4 jeux, seul `PREFIXE` change).

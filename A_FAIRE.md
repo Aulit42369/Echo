@@ -23,19 +23,20 @@
 - 25/10 : adresse de contact **aulit42369@gmail.com** dans `privacy.html` (7 langues, lien `mailto:`, tickets GitHub en second choix), cache `echo-v2.1`. L'appli Android ouvre la page en ligne : rien à reconstruire. Pas de champ contact dans `fastlane` (adresse à saisir dans la Play Console, voir `PLAY_STORE.md`).
 - **26/10** : politique conforme LCEN/RGPD : mentions légales complètes (éditeur et directeur de la publication Aulit42369, personne physique non professionnelle anonyme, identité communiquée à l'hébergeur ; GitHub, Inc. avec adresse, téléphone, page de contact), transferts hors UE (DPF / clauses types) dans « Hébergement », contact et réclamation CNIL dans « Vos droits », ajout des rubriques « Avis sur le Play Store » (demande d'avis de l'appli Android) et « Tes droits », 7 langues, le français fait foi. Cache `echo-v2.2` (test `echo-defi` mis à jour). Lien de la politique laissé dans Options, comme LUMEN (Réglages) : en haut de l'accueil il chevaucherait le bouton « autres jeux » sur petit écran.
 - **28/10** : accessibilité : `<h1>`, canvas, lien légal et panneau du défi enveloppés dans `<main>` (comme Fragments), pastille et panneau « autres jeux » insérés dans ce `<main>` ; rendu identique (positions comparées avant/après dans Chromium sans tête, 0 erreur console) ; pas de pied de page. Cache `echo-v2.3` (test `echo-defi` mis à jour). Docs de cadrage créées dans `docs/`. Android natif : rien à faire.
+- **28/10** : mesure d'audience **GoatCounter sans cookie** (même compte et même méthode que le Site) : chemins `/echo/…`, comptée seulement sur `*.github.io` (jamais dans l'appli Android, une WebView, en local), opposition `skipgc` + bouton « Ne pas être compté » dans `privacy.html` (toutes les langues, texte repris du Site, liste des traceurs et date mises à jour), CSP élargie (empreinte du script, `gc.zgo.at`, `aulit42369.goatcounter.com`), cache `echo-v2.4`, `tests/statistiques.test.js`. Vérifié dans Chrome sans tête (URL github.io simulée : un envoi `/echo/` ; local et `skipgc` : aucun ; 0 erreur console/CSP).
 
 ## En cours
 - Rien.
 
 ## À faire
-- Play Console : vérifier que la fiche « Sécurité des données » reste cohérente (aucune donnée collectée ; avis Google Play géré par Google).
+- Play Console : vérifier que la fiche « Sécurité des données » reste cohérente (appli : aucune donnée collectée ; GoatCounter ne tourne que sur la version web ; avis Google Play géré par Google).
 - Vérifier à l'œil la carte image (web et Android) sur téléphone : aucun rendu automatique possible dans les tests.
 - Quand LUMEN / Fragments / Résonance seront sur le Play Store : remplacer les liens de `JEUX` (`autres-jeux.js`) et `AutresJeux.JEUX` (Android).
 - Purger un jour les anciennes clés `echo_daily_*` (une par jour joué).
 
 - **URL de politique dans la Play Console à vérifier** : `PLAY_STORE.md` donnait `…/echo/privacy.html` (minuscule, **404**) — corrigé le 25/10 en `https://aulit42369.github.io/Echo/privacy.html` ; vérifier ce qui est saisi dans la Play Console.
 - `robots.txt` impossible : il devrait être à la racine `aulit42369.github.io/` (aucun dépôt utilisateur) — seul `sitemap.xml` est fourni, à déclarer dans Google Search Console.
-- Mesure d'audience : rien d'installé (à décider ; si oui, option sans cookie type GoatCounter/Plausible, à ajouter à `privacy.html`).
+- Mesure d'audience : vérifier dans le tableau de bord `aulit42369.goatcounter.com` que les visites arrivent sous `/echo/` (quelques minutes après une visite).
 
 ## Décisions prises
 - 25/10 (lot 18) : découpage en **scripts classiques à portée globale** (pas de modules ES ni d'outil de construction) : fichiers statiques servis tels quels par GitHub Pages, code déplacé à l'identique. Android : **fonctions d'extension** de `GameView` (état gardé dans la classe) plutôt qu'une réécriture en classes séparées, pour ne rien changer au comportement.
