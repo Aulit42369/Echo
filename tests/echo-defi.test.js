@@ -22,8 +22,8 @@ const CLES_DEFI = ['defiAFaire', 'defiFait', 'defiSerie', 'defiSerieTxt', 'defiP
 function textesDefi() { const T = textes(); return Object.fromEntries(CLES_DEFI.map(k => [k, T[k]])); }
 const nbLangues = (html.match(/"langs":\[(.*?)\]/)[1].match(/"code"/g) || []).length;
 
-test('service worker : version echo-v2.2, modules en cache', () => {
-  assert.match(sw, /const VERSION = 'echo-v2.2';/);
+test('service worker : version echo-v2.3, modules en cache', () => {
+  assert.match(sw, /const VERSION = 'echo-v2.3';/);
   for (const f of ['defi.js', 'share-card.js', 'autres-jeux.js']) {
     assert.ok(sw.includes("'./" + f + "'"), f + ' en cache');
     assert.ok(html.includes('<script src="' + f + '"></script>'), f + ' chargé');

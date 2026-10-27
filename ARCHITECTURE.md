@@ -62,6 +62,9 @@ Ordre de chargement (scripts classiques, portée globale partagée, mode strict 
 `share-card.js`, `autres-jeux.js`, puis `js/` dans l'ordre du tableau. Un fichier ne doit **rien exécuter au chargement** qui
 dépende d'un fichier chargé après lui (les fonctions, elles, peuvent s'appeler entre fichiers une fois tout chargé).
 
+Accessibilité (28/10) : `<h1>` masqué, canvas, lien légal et panneau du défi sont dans un `<main>` sans style ; `autres-jeux.js` ajoute sa pastille et son panneau dans ce `<main>` (repli sur `body`). Pas de pied de page (canvas plein écran) : lien `privacy.html` sur l'écran Options.
+Documents de cadrage dans `docs/` : `PRD.md`, `TRD.md`, `APP_FLOW.md`, `DESIGN_BRIEF.md`, `BACKEND_SCHEMA.md`, `IMPLEMENTATION_PLAN.md`.
+
 ## 2. Sources de vérité uniques
 - Traductions : `i18n/strings.json` du projet Android → bloc `<i18n:auto>` de `js/i18n.js` (généré par `tools/gen_i18n.py`, qui écrit
   directement dans ce dépôt depuis le 25/10/2026 ; dans `index.html` avant le lot 18). Tous les textes y sont, défi, carte image et autres jeux compris (l'ancien bloc `<defi:i18n>` est supprimé).
@@ -85,7 +88,7 @@ Aucun secret, aucun réseau, aucune donnée personnelle. Le texte partagé ne co
 ## 5. Identité
 - URL : `https://aulit42369.github.io/Echo/` (**écart connu** : domaine partagé, contraire à la règle « un domaine par app » ; ne pas changer sans décision).
 - `id` du manifest : `/Echo/` — **ne jamais modifier**. `start_url` / `scope` : `./`.
-- Cache : préfixe `echo-` (actuel `echo-v2.1`) ; le SW ne supprime que les caches `echo-*`.
+- Cache : préfixe `echo-` (actuel `echo-v2.3`) ; le SW ne supprime que les caches `echo-*`.
 - Nom du fichier image partagé : `echo-defi-<n>.png`.
 - Nom de jeu pour la graine du défi : `'echo'`.
 

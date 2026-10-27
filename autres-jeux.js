@@ -43,7 +43,8 @@
     var btn = doc.createElement('button'); btn.id = 'autresBtn'; btn.type = 'button'; btn.hidden = true;
     var pan = doc.createElement('div'); pan.id = 'autres'; pan.hidden = true;
     pan.setAttribute('role', 'dialog'); pan.setAttribute('aria-modal', 'true'); pan.setAttribute('aria-labelledby', 'autresTitre');
-    doc.body.appendChild(btn); doc.body.appendChild(pan);
+    var hote = doc.querySelector('main') || doc.body; // dans le <main> de la page (repère d'accessibilité)
+    hote.appendChild(btn); hote.appendChild(pan);
     var langue = null, historique = false;
 
     function remplir() {

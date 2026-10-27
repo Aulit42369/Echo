@@ -22,6 +22,7 @@
 
 - 25/10 : adresse de contact **aulit42369@gmail.com** dans `privacy.html` (7 langues, lien `mailto:`, tickets GitHub en second choix), cache `echo-v2.1`. L'appli Android ouvre la page en ligne : rien à reconstruire. Pas de champ contact dans `fastlane` (adresse à saisir dans la Play Console, voir `PLAY_STORE.md`).
 - **26/10** : politique conforme LCEN/RGPD : mentions légales complètes (éditeur et directeur de la publication Aulit42369, personne physique non professionnelle anonyme, identité communiquée à l'hébergeur ; GitHub, Inc. avec adresse, téléphone, page de contact), transferts hors UE (DPF / clauses types) dans « Hébergement », contact et réclamation CNIL dans « Vos droits », ajout des rubriques « Avis sur le Play Store » (demande d'avis de l'appli Android) et « Tes droits », 7 langues, le français fait foi. Cache `echo-v2.2` (test `echo-defi` mis à jour). Lien de la politique laissé dans Options, comme LUMEN (Réglages) : en haut de l'accueil il chevaucherait le bouton « autres jeux » sur petit écran.
+- **28/10** : accessibilité : `<h1>`, canvas, lien légal et panneau du défi enveloppés dans `<main>` (comme Fragments), pastille et panneau « autres jeux » insérés dans ce `<main>` ; rendu identique (positions comparées avant/après dans Chromium sans tête, 0 erreur console) ; pas de pied de page. Cache `echo-v2.3` (test `echo-defi` mis à jour). Docs de cadrage créées dans `docs/`. Android natif : rien à faire.
 
 ## En cours
 - Rien.
