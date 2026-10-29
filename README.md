@@ -1,36 +1,10 @@
-# ÉCHO — version web (PWA)
+# ÉCHO — ancienne adresse (renvoi)
 
-Jeu mobile de labyrinthe dans le noir : un écho révèle les murs… et attire les Ombres.
-Publié sur GitHub Pages : https://aulit42369.github.io/Echo/ (7 langues, hors ligne après la première visite).
+ÉCHO a déménagé sur **https://echo-jeu.github.io/** (dépôt `echo-jeu/echo-jeu.github.io`, dossier local `F:\GITHUB\Echo`).
 
-L'appli Android (Kotlin natif) et la source des traductions (`i18n/strings.json`, `tools/gen_i18n.py`)
-vivent dans `F:\Stream\files\JEUX\Echo-PlayStore-1.1.0\Echo`, pas ici.
+Ce dépôt ne sert plus qu'à l'ancienne adresse `https://aulit42369.github.io/Echo/` :
+- `index.html`, `privacy.html`, `404.html` renvoient vers la même page sur la nouvelle adresse (chemin, requête et fragment conservés) ;
+- `sw.js` vide **uniquement** les caches `echo-*` des joueurs (l'origine est partagée avec le Site et Cra), se désinscrit et recharge les onglets ;
+- `manifest.webmanifest` est gardé, inoffensif ; `google9ad7f8bd44912903.html` est gardé (ancienne propriété Search Console).
 
-## Fichiers
-
-| Fichier | Rôle |
-|---|---|
-| `index.html` | la page (HTML, SEO) ; charge `css/echo.css` puis les scripts dans l'ordre |
-| `css/echo.css` | styles |
-| `js/*.js` | le jeu, un fichier par responsabilité (textes, réglages, labyrinthe, sons, entrées, niveau, logique, échos, Ombres, rendu, écrans, défi, boucle) — tableau dans `ARCHITECTURE.md` |
-| `defi.js` | défi du jour commun aux 4 jeux (date de Paris, graine, série, partage) — **copie identique** dans LUMEN, Fragments, Résonance |
-| `share-card.js` | carte image 1080×1920 du défi (format story) + partage avec fichier, sinon téléchargement |
-| `autres-jeux.js` | pastille « AUTRES JEUX » de l'accueil et panneau des 3 autres jeux d'Aulit |
-| `sw.js` | service worker (cache `echo-vX.Y`) |
-| `manifest.webmanifest`, `icons/`, `screenshots/` | installation PWA |
-| `privacy.html` | confidentialité, conditions d'utilisation, mentions légales (7 langues) |
-| `404.html`, `sitemap.xml`, `og-image.png` | page introuvable, plan du site, image d'aperçu des liens |
-| `tests/` | tests automatiques |
-
-## Tests
-
-Depuis ce dossier : `node --test` (Node 24, aucune dépendance). Ne pas écrire `node --test tests/`.
-Après un changement voulu du défi ou du labyrinthe : `MAJ_PARITE=1 node --test`, puis recopier `tests/parite-android.json`
-dans `app/src/test/resources/` du projet Android (test de parité `PariteTest.kt`).
-
-Textes : `i18n/strings.json` du projet Android puis `python tools/gen_i18n.py` (écrit directement le bloc `<i18n:auto>` de `js/i18n.js`).
-Après un changement voulu de la géométrie (`js/echos.js`, `farCell`) : `MAJ_PARITE=1 node --test`, puis recopier aussi `tests/geometrie-android.json`.
-
-## Mise en ligne
-
-GitHub Desktop → commit → Push origin. À chaque changement d'un fichier du jeu, monter `VERSION` dans `sw.js` ; un nouveau fichier `js/` va aussi dans la liste `JEU` de `sw.js`.
+Ne plus jamais y publier le jeu. Test : `node --test`.

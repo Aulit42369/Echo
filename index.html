@@ -2,106 +2,33 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-erYlKgY9AesN11UwOPMVp8NHIh7efU9BgQW1qcNvkcw=' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://aulit42369.goatcounter.com; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' data: blob: https://aulit42369.goatcounter.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<title>Jeu de labyrinthe dans le noir, guidé par l'écho | ÉCHO</title>
-<meta name="description" content="Tu avances dans un labyrinthe plongé dans le noir. Chaque écho montre les murs un instant, mais il attire aussi les Ombres.">
-<meta name="theme-color" content="#05070a">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="ÉCHO">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="canonical" href="https://aulit42369.github.io/Echo/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="ÉCHO">
-<meta property="og:locale" content="fr_FR">
-<meta property="og:title" content="Jeu de labyrinthe dans le noir, guidé par l'écho | ÉCHO">
-<meta property="og:description" content="Tu avances dans un labyrinthe plongé dans le noir. Chaque écho montre les murs un instant, mais il attire aussi les Ombres.">
-<meta property="og:url" content="https://aulit42369.github.io/Echo/">
-<meta property="og:image" content="https://aulit42369.github.io/Echo/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="ÉCHO : une onde cyan qui se propage dans le noir">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/echo.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ÉCHO a déménagé</title>
+<meta name="description" content="ÉCHO, le jeu de labyrinthe dans le noir, a une nouvelle adresse : echo-jeu.github.io.">
+<link rel="canonical" href="https://echo-jeu.github.io/">
+<meta http-equiv="refresh" content="0; url=https://echo-jeu.github.io/">
+<script>
+// Même page, même requête, même fragment sur la nouvelle adresse (/Echo/x → /x).
+(function () { var p = location.pathname.replace(/^\/Echo(?=\/|$)/i, '') || '/';
+  location.replace('https://echo-jeu.github.io' + p + location.search + location.hash); })();
+</script>
+<link rel="icon" type="image/png" href="/Echo/icons/icon-192.png">
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: #05070a; color: #e9f4f6; }
+  body { display: grid; place-items: center; text-align: center; font: 300 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { padding: 24px 16px; max-width: 420px; }
+  h1 { font-weight: 200; font-size: 40px; letter-spacing: .4em; padding-left: .4em; margin: 0 0 12px; }
+  a { color: #5cf2ff; }
+  a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .en { color: #8fa3a8; font-size: 14px; }
+</style>
 </head>
 <body>
 <main>
-<h1 class="sr">ÉCHO, jeu de labyrinthe dans le noir</h1>
-<noscript><p style="position:relative;z-index:3;max-width:34em;margin:0 auto;padding:24px;font:16px/1.5 system-ui,sans-serif;color:#fff">ÉCHO est un jeu de labyrinthe dans le noir : lance un écho pour révéler les murs, écoute les sons et échappe aux Ombres. Jeu sonore gratuit, jouable hors ligne sur Android et dans le navigateur. Active JavaScript pour jouer.</p></noscript>
-<canvas id="echo" tabindex="0" aria-label="ÉCHO, jeu de labyrinthe dans le noir"></canvas>
-<a id="lienLegal" href="privacy.html" hidden></a>
-<div id="defiFin" hidden>
-  <pre id="defiApercu" role="img"></pre>
-  <button id="defiPartager" type="button"></button>
-  <button id="defiImage" type="button"></button>
-  <p id="defiEtat" role="status" aria-live="polite"></p>
-  <div id="defiCopie" hidden><label id="defiLabel" for="defiTexte"></label><textarea id="defiTexte" readonly rows="6"></textarea></div>
-</div>
+  <h1>ÉCHO</h1>
+  <p>ÉCHO a déménagé : <a href="https://echo-jeu.github.io/">echo-jeu.github.io</a></p>
+  <p class="en" lang="en">ÉCHO has moved: <a href="https://echo-jeu.github.io/">echo-jeu.github.io</a></p>
 </main>
-<script src="defi.js"></script>
-<script src="share-card.js"></script>
-<script src="autres-jeux.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/reglages.js"></script>
-<script src="js/labyrinthe.js"></script>
-<script src="js/sons.js"></script>
-<script src="js/appareil.js"></script>
-<script src="js/etat.js"></script>
-<script src="js/entrees.js"></script>
-<script src="js/niveau.js"></script>
-<script src="js/logique.js"></script>
-<script src="js/echos.js"></script>
-<script src="js/ombres.js"></script>
-<script src="js/rendu.js"></script>
-<script src="js/ecrans.js"></script>
-<script src="js/defi-ecran.js"></script>
-<script src="js/boucle.js"></script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "VideoGame",
-  "name": "ÉCHO",
-  "url": "https://aulit42369.github.io/Echo/",
-  "description": "Tu avances dans un labyrinthe plongé dans le noir. Chaque écho montre les murs un instant, mais il attire aussi les Ombres.",
-  "image": "https://aulit42369.github.io/Echo/og-image.png",
-  "inLanguage": [
-    "fr",
-    "en",
-    "es",
-    "de",
-    "it",
-    "pt",
-    "ja"
-  ],
-  "genre": [
-    "Labyrinthe",
-    "Jeu sonore",
-    "Arcade"
-  ],
-  "gamePlatform": [
-    "Android",
-    "Navigateur web"
-  ],
-  "applicationCategory": "GameApplication",
-  "operatingSystem": "Android, Web",
-  "isAccessibleForFree": true,
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Aulit42369",
-    "url": "https://aulit42369.github.io/Site/"
-  }
-}
-</script>
-<!-- Statistiques sans cookie (GoatCounter, chemins /echo/…) : web public github.io seulement, jamais dans l'appli ni en local ; opposition : localStorage.skipgc (bouton de privacy.html). Empreinte sha256 dans la CSP : à recalculer si ce script change. -->
-<script>(function(){try{if(!/(^|\.)github\.io$/.test(location.hostname)||localStorage.getItem('skipgc')==='t')return}catch(e){return}window.goatcounter={path:function(p){return '/echo'+p.replace(/^\/Echo/,'')}};var s=document.createElement('script');s.async=true;s.crossOrigin='anonymous';s.integrity='sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+';s.src='https://gc.zgo.at/count.v4.js';s.setAttribute('data-goatcounter','https://aulit42369.goatcounter.com/count');document.head.appendChild(s)})()</script>
 </body>
 </html>

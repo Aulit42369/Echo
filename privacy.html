@@ -2,315 +2,33 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ÉCHO · Confidentialité</title>
-<meta name="description" content="Politique de confidentialité, conditions d'utilisation et mentions légales du jeu ÉCHO.">
-<meta name="theme-color" content="#05070a">
-<link rel="icon" type="image/png" href="icons/icon-192.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ÉCHO a déménagé</title>
+<meta name="description" content="ÉCHO, le jeu de labyrinthe dans le noir, a une nouvelle adresse : echo-jeu.github.io.">
+<link rel="canonical" href="https://echo-jeu.github.io/privacy.html">
+<meta http-equiv="refresh" content="0; url=https://echo-jeu.github.io/privacy.html">
+<script>
+// Même page, même requête, même fragment sur la nouvelle adresse (/Echo/x → /x).
+(function () { var p = location.pathname.replace(/^\/Echo(?=\/|$)/i, '') || '/';
+  location.replace('https://echo-jeu.github.io' + p + location.search + location.hash); })();
+</script>
+<link rel="icon" type="image/png" href="/Echo/icons/icon-192.png">
 <style>
-  /* Page sobre, dans l'univers sombre du jeu ; lisible et imprimable. */
-  :root { --bg: #05070a; --fg: #e9f4f6; --muted: #8fa3a8; --accent: #5cf2ff; --line: #16262b; color-scheme: dark; }
-  html { background: var(--bg); }
-  body { margin: 0; background: var(--bg); color: var(--fg); font: 300 17px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans CJK JP", sans-serif; }
-  main { max-width: 680px; margin: 0 auto; padding: 48px 20px 72px; }
-  h1 { font-weight: 200; font-size: 44px; letter-spacing: .4em; margin: 0 0 4px; }
-  .sub { color: var(--muted); margin: 0 0 28px; }
-  nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 32px; }
-  nav a { color: var(--fg); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 14px; }
-  nav a[aria-current="true"] { border-color: var(--accent); color: var(--accent); }
-  section { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 24px; }
-  section[hidden] { display: none; }
-  h2 { font-weight: 300; font-size: 22px; color: var(--accent); margin: 0 0 12px; letter-spacing: .02em; }
-  h3 { font-weight: 400; font-size: 16px; margin: 20px 0 4px; }
-  p { margin: 0 0 10px; }
-  .date { color: var(--muted); font-size: 14px; }
-  .retour { display: inline-block; margin: 0 0 20px; color: var(--muted); text-decoration: none; font-size: 14px; letter-spacing: .2em; }
-  .mail { font-family: ui-monospace, monospace; color: var(--accent); }
-  a { color: var(--accent); }
-.gc { font: inherit; font-size: .92em; color: inherit; background: transparent; border: 1px solid currentColor; border-radius: 999px; padding: 5px 14px; cursor: pointer; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: #05070a; color: #e9f4f6; }
+  body { display: grid; place-items: center; text-align: center; font: 300 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { padding: 24px 16px; max-width: 420px; }
+  h1 { font-weight: 200; font-size: 40px; letter-spacing: .4em; padding-left: .4em; margin: 0 0 12px; }
+  a { color: #5cf2ff; }
+  a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .en { color: #8fa3a8; font-size: 14px; }
 </style>
 </head>
 <body>
 <main>
-  <a class="retour" href="./">← ÉCHO</a>
   <h1>ÉCHO</h1>
-  <p class="sub" id="sub">Politique de confidentialité · Privacy policy</p>
-  <nav id="langs" aria-label="Langue / Language">
-    <a href="#fr" data-l="fr">Français</a><a href="#en" data-l="en">English</a><a href="#es" data-l="es">Español</a>
-    <a href="#de" data-l="de">Deutsch</a><a href="#it" data-l="it">Italiano</a><a href="#pt" data-l="pt">Português</a><a href="#ja" data-l="ja">日本語</a>
-  </nav>
-
-  <section id="fr" lang="fr">
-    <h2>Politique de confidentialité</h2>
-    <p class="date">Dernière mise à jour : 28 octobre 2026</p>
-    <h3>Aucune donnée collectée</h3>
-    <p>ÉCHO ne collecte, ne transmet et ne vend aucune donnée personnelle. Le jeu ne contient ni publicité, ni compte utilisateur ; seule la version web compte les visites, de façon anonyme (voir « Statistiques de visite »). L'application Android ne demande pas l'accès à Internet.</p>
-    <h3>Données stockées sur ton appareil</h3>
-    <p>Ton record, tes étoiles, tes scores du défi du jour, tes options et ta langue sont enregistrés uniquement sur ton appareil. Ils sont supprimés quand tu désinstalles le jeu ou effaces ses données.</p>
-    <h3>Fonctions de l'appareil</h3>
-    <p>Vibration : pour le battement de cœur et les impacts. Capteur de mouvement : uniquement si tu actives le contrôle par inclinaison, et les mesures restent sur l'appareil. Synthèse vocale : en mode audio, le texte est lu par le moteur vocal installé sur ton appareil ; son fonctionnement dépend de son éditeur.</p>
-    <h3>Version web</h3>
-    <p>La version web est hébergée par GitHub Pages, qui peut enregistrer des informations techniques comme l'adresse IP (voir la <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">déclaration de confidentialité de GitHub</a>). Ces informations peuvent être traitées aux États-Unis : ces transferts sont encadrés par le Data Privacy Framework UE–États-Unis (décision d'adéquation du 10 juillet 2023) lorsque le prestataire y adhère, sinon par les clauses contractuelles types de la Commission européenne.</p>
-    <h3>Enfants</h3>
-    <p>Le jeu ne collecte aucune donnée, y compris auprès des enfants.</p>
-    <h3>Tes droits</h3>
-    <p>Aucune donnée te concernant n'est détenue par l'éditeur : il n'y a rien à consulter, corriger ou supprimer de son côté. Tes données de jeu restent sous ton contrôle, sur ton appareil. Pour toute question sur tes données, écris à <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>. Tu peux aussi adresser une réclamation à la CNIL : <a href="https://www.cnil.fr" rel="noopener">www.cnil.fr</a>, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07.</p>
-    <h3>Statistiques de visite (version web seulement)</h3>
-    <p>La version web du jeu utilise <a href="https://www.goatcounter.com/help/privacy" rel="noopener">GoatCounter</a>, service de mesure d'audience exploité depuis l'Irlande et hébergé dans l'Union européenne (serveurs en Finlande et en Allemagne). Il compte les pages vues sans cookie et sans identifiant qui te suivrait d'une visite à l'autre. Ton adresse IP sert seulement à déduire le pays et à ne pas compter deux fois la même visite : elle n'est jamais enregistrée (gardée quelques heures au plus en mémoire, puis oubliée). Seules des statistiques globales sont conservées : pages vues, site d'origine, navigateur, pays et taille d'écran approximatifs. Cette mesure sert uniquement à connaître la fréquentation du jeu : elle est exemptée de consentement, selon les recommandations de la CNIL. Base légale : l'intérêt légitime à connaître la fréquentation du jeu. L'appli Android ne mesure rien. Tu peux t'y opposer à tout moment sur ce navigateur :</p>
-    <p class="gc-choix"><button type="button" class="gc" data-gc="Ne pas être compté|Être compté de nouveau" aria-pressed="false">Ne pas être compté</button> <span data-gc-etat="Tes visites sont comptées, de façon anonyme.|Tes visites ne sont pas comptées sur ce navigateur."></span></p>
-    <h3>Cookies</h3>
-    <p>Le jeu n'utilise aucun cookie ni traceur publicitaire ; la version web utilise seulement la mesure d'audience sans cookie décrite plus haut, exemptée de consentement. Il n'y a donc pas de bandeau de consentement : seules tes données de jeu (et la clé <code>skipgc</code> si tu as choisi « Ne pas être compté ») sont gardées dans le stockage local du navigateur ou de l'appli, sur ton appareil.</p>
-    <h3>Avis sur le Play Store (appli Android)</h3>
-    <p>Après ton troisième Défi du jour réussi, l'appli Android peut afficher une seule fois la fenêtre de notation de Google Play. Cette fenêtre est gérée par Google Play, selon ses propres règles ; ÉCHO ne reçoit ni ta note ni ton commentaire.</p>
-    <h3>Partage du résultat</h3>
-    <p>Le bouton « Partager » n'envoie rien tout seul : il ouvre le partage de ton appareil (ou copie le texte) et c'est toi qui choisis où l'envoyer. Ce texte contient seulement le numéro du défi, ton score, ta série et le lien du jeu.</p>
-    <h3>Conditions d'utilisation</h3>
-    <p>ÉCHO est gratuit, sans compte et sans achat. Il est fourni tel quel, sans garantie : ta progression est gardée sur ton appareil et peut être perdue si tu effaces ses données. Le jeu, ses textes et ses visuels restent la propriété de leur auteur. Ces conditions relèvent du droit français.</p>
-    <h3>Mentions légales</h3>
-    <p>Éditeur et directeur de la publication : Aulit42369, personne physique éditant ce jeu à titre non professionnel, qui a choisi de rester anonyme ; ses éléments d'identification ont été communiqués à l'hébergeur, comme le permet la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN).<br>
-    Hébergeur : GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis — téléphone : +1 877 448 4820 — <a href="https://support.github.com/contact" rel="noopener">support.github.com/contact</a>.</p>
-    <h3>Contact</h3>
-    <p>Pour toute question : <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>, ou ouvre un ticket sur <a href="https://github.com/Aulit42369/Echo/issues" rel="noopener">la page GitHub du jeu</a>.</p>
-  </section>
-
-  <section id="en" lang="en">
-    <h2>Privacy policy</h2>
-    <p class="date">Last updated: October 28, 2026. The French version is the reference text.</p>
-    <h3>No data collected</h3>
-    <p>ÉCHO does not collect, transmit or sell any personal data. The game has no ads and no user accounts; only the web version counts visits, anonymously (see “Visit statistics”). The Android app does not request internet access.</p>
-    <h3>Data stored on your device</h3>
-    <p>Your best level, stars, daily challenge scores, options and language are stored only on your device. They are deleted when you uninstall the game or clear its data.</p>
-    <h3>Device features</h3>
-    <p>Vibration: for the heartbeat and impacts. Motion sensor: only if you turn on tilt controls, and readings stay on the device. Text-to-speech: in audio mode, text is read by the speech engine installed on your device; how it works depends on its provider.</p>
-    <h3>Web version</h3>
-    <p>The web version is hosted by GitHub Pages, which may log technical information such as IP addresses (see the <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>). This information may be processed in the United States: such transfers are covered by the EU–US Data Privacy Framework (adequacy decision of 10 July 2023) where the provider participates in it, and otherwise by the European Commission's standard contractual clauses.</p>
-    <h3>Children</h3>
-    <p>The game collects no data from anyone, including children.</p>
-    <h3>Your rights</h3>
-    <p>The publisher holds no data about you, so there is nothing to access, correct or delete on their side. Your game data stays under your control, on your device. For any question about your data, write to <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>. You can also lodge a complaint with the CNIL, the French data protection authority: <a href="https://www.cnil.fr" rel="noopener">www.cnil.fr</a>, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, France.</p>
-    <h3>Visit statistics (web version only)</h3>
-    <p>The web version of the game uses <a href="https://www.goatcounter.com/help/privacy" rel="noopener">GoatCounter</a>, an audience measurement service operated from Ireland and hosted in the European Union (servers in Finland and Germany). It counts page views without cookies and without any identifier that would follow you from one visit to the next. Your IP address is only used to work out your country and to avoid counting the same visit twice: it is never stored (kept in memory for a few hours at most, then forgotten). Only overall statistics are kept: pages viewed, referring site, browser, approximate country and screen size. This measurement is only used to know how many people visit the game: it is exempt from consent under the CNIL's guidelines. Legal basis: legitimate interest in knowing the game's audience. The Android app measures nothing. You can opt out at any time on this browser:</p>
-    <p class="gc-choix"><button type="button" class="gc" data-gc="Don't count me|Count me again" aria-pressed="false">Don't count me</button> <span data-gc-etat="Your visits are counted anonymously.|Your visits are not counted on this browser."></span></p>
-    <h3>Cookies</h3>
-    <p>The game uses no cookies and no advertising trackers; the web version only uses the cookie-free audience measurement described above, which is exempt from consent. So there is no consent banner: only your game data (and the <code>skipgc</code> key if you chose “Don't count me”) is kept in the browser's or app's local storage, on your device.</p>
-    <h3>Play Store review (Android app)</h3>
-    <p>After your third completed Daily Challenge, the Android app may show the Google Play rating window once. That window is run by Google Play under its own rules; ÉCHO never receives your rating or your comment.</p>
-    <h3>Sharing your result</h3>
-    <p>The “Share” button sends nothing on its own: it opens your device's share sheet (or copies the text) and you choose where it goes. The text only contains the challenge number, your score, your streak and the game's link.</p>
-    <h3>Terms of use</h3>
-    <p>ÉCHO is free, with no account and no purchases. It is provided as is, without warranty: your progress is kept on your device and can be lost if you clear its data. The game, its texts and visuals remain the property of their author. These terms are governed by French law.</p>
-    <h3>Legal notice</h3>
-    <p>Publisher and publication director: Aulit42369, a private individual publishing this game on a non-professional basis who has chosen to remain anonymous; their identification details have been provided to the host, as permitted by French law no. 2004-575 of 21 June 2004 on confidence in the digital economy (LCEN).<br>
-    Host: GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, United States — phone: +1 877 448 4820 — <a href="https://support.github.com/contact" rel="noopener">support.github.com/contact</a>.</p>
-    <h3>Contact</h3>
-    <p>Questions: <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>, or open an issue on <a href="https://github.com/Aulit42369/Echo/issues" rel="noopener">the game's GitHub page</a>.</p>
-  </section>
-
-  <section id="es" lang="es">
-    <h2>Política de privacidad</h2>
-    <p class="date">Última actualización: 28 de octubre de 2026. La versión francesa es la que da fe.</p>
-    <h3>No se recopilan datos</h3>
-    <p>ÉCHO no recopila, transmite ni vende datos personales. El juego no tiene anuncios ni cuentas de usuario; solo la versión web cuenta las visitas, de forma anónima (ver «Estadísticas de visitas»). La app de Android no solicita acceso a Internet.</p>
-    <h3>Datos guardados en tu dispositivo</h3>
-    <p>Tu récord, estrellas, puntuaciones del reto diario, opciones e idioma se guardan solo en tu dispositivo. Se eliminan al desinstalar el juego o borrar sus datos.</p>
-    <h3>Funciones del dispositivo</h3>
-    <p>Vibración: para el latido y los impactos. Sensor de movimiento: solo si activas el control por inclinación; los datos no salen del dispositivo. Síntesis de voz: en modo audio, el texto lo lee el motor de voz instalado en tu dispositivo; su funcionamiento depende de su proveedor.</p>
-    <h3>Versión web</h3>
-    <p>La versión web está alojada en GitHub Pages, que puede registrar información técnica como la dirección IP (consulta la <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">declaración de privacidad de GitHub</a>). Esta información puede tratarse en Estados Unidos: estas transferencias están amparadas por el Marco de Privacidad de Datos UE-EE. UU. (decisión de adecuación de 10 de julio de 2023) cuando el proveedor está adherido a él y, si no, por las cláusulas contractuales tipo de la Comisión Europea.</p>
-    <h3>Menores</h3>
-    <p>El juego no recopila datos de nadie, incluidos los menores.</p>
-    <h3>Tus derechos</h3>
-    <p>El editor no conserva ningún dato sobre ti: no hay nada que consultar, corregir o eliminar por su parte. Tus datos de juego siguen bajo tu control, en tu dispositivo. Para cualquier pregunta sobre tus datos, escribe a <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>. También puedes presentar una reclamación ante la CNIL, la autoridad francesa de protección de datos: <a href="https://www.cnil.fr" rel="noopener">www.cnil.fr</a>, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, Francia.</p>
-    <h3>Estadísticas de visitas (solo versión web)</h3>
-    <p>La versión web del juego usa <a href="https://www.goatcounter.com/help/privacy" rel="noopener">GoatCounter</a>, un servicio de medición de audiencia operado desde Irlanda y alojado en la Unión Europea (servidores en Finlandia y Alemania). Cuenta las páginas vistas sin cookies y sin ningún identificador que te siga de una visita a otra. Tu dirección IP solo sirve para deducir el país y no contar dos veces la misma visita: nunca se guarda (se conserva en memoria unas horas como máximo y luego se olvida). Solo se conservan estadísticas globales: páginas vistas, sitio de origen, navegador, país y tamaño de pantalla aproximados. Esta medición solo sirve para conocer la audiencia del juego: está exenta de consentimiento según las recomendaciones de la CNIL. Base jurídica: el interés legítimo en conocer la audiencia del juego. La app de Android no mide nada. Puedes oponerte en cualquier momento en este navegador:</p>
-    <p class="gc-choix"><button type="button" class="gc" data-gc="No contarme|Volver a contarme" aria-pressed="false">No contarme</button> <span data-gc-etat="Tus visitas se cuentan de forma anónima.|Tus visitas no se cuentan en este navegador."></span></p>
-    <h3>Cookies</h3>
-    <p>El juego no usa cookies ni rastreadores publicitarios; la versión web solo usa la medición de audiencia sin cookies descrita arriba, exenta de consentimiento. Por eso no hay aviso de consentimiento: solo tus datos de juego (y la clave <code>skipgc</code> si elegiste «No contarme») se guardan en el almacenamiento local del navegador o de la app, en tu dispositivo.</p>
-    <h3>Valoración en Play Store (app Android)</h3>
-    <p>Después de tu tercer Reto diario superado, la app de Android puede mostrar una sola vez la ventana de valoración de Google Play. Esa ventana la gestiona Google Play según sus propias reglas; ÉCHO no recibe ni tu nota ni tu comentario.</p>
-    <h3>Compartir el resultado</h3>
-    <p>El botón «Compartir» no envía nada por sí solo: abre el menú para compartir de tu dispositivo (o copia el texto) y tú eliges dónde enviarlo. El texto solo contiene el número del reto, tu puntuación, tu racha y el enlace del juego.</p>
-    <h3>Condiciones de uso</h3>
-    <p>ÉCHO es gratuito, sin cuenta ni compras. Se ofrece tal cual, sin garantía: tu progreso se guarda en tu dispositivo y puede perderse si borras sus datos. El juego, sus textos y sus imágenes siguen siendo propiedad de su autor. Estas condiciones se rigen por la ley francesa.</p>
-    <h3>Aviso legal</h3>
-    <p>Editor y director de la publicación: Aulit42369, persona física que edita este juego a título no profesional y ha elegido el anonimato; sus datos de identificación se han comunicado al proveedor de alojamiento, como permite la ley francesa n.º 2004-575 de 21 de junio de 2004 para la confianza en la economía digital (LCEN).<br>
-    Alojamiento: GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, Estados Unidos — teléfono: +1 877 448 4820 — <a href="https://support.github.com/contact" rel="noopener">support.github.com/contact</a>.</p>
-    <h3>Contacto</h3>
-    <p>Consultas: <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>, o abre una incidencia en <a href="https://github.com/Aulit42369/Echo/issues" rel="noopener">la página de GitHub del juego</a>.</p>
-  </section>
-
-  <section id="de" lang="de">
-    <h2>Datenschutzerklärung</h2>
-    <p class="date">Zuletzt aktualisiert: 28. Oktober 2026. Maßgeblich ist die französische Fassung.</p>
-    <h3>Keine Datenerhebung</h3>
-    <p>ÉCHO erhebt, überträgt oder verkauft keine personenbezogenen Daten. Das Spiel enthält keine Werbung und keine Benutzerkonten; nur die Webversion zählt Besuche, anonym (siehe „Besuchsstatistik“). Die Android-App fordert keinen Internetzugriff an.</p>
-    <h3>Auf deinem Gerät gespeicherte Daten</h3>
-    <p>Dein Rekord, deine Sterne, Ergebnisse der Tagesaufgabe, Optionen und Sprache werden nur auf deinem Gerät gespeichert. Sie werden gelöscht, wenn du das Spiel deinstallierst oder seine Daten löschst.</p>
-    <h3>Gerätefunktionen</h3>
-    <p>Vibration: für den Herzschlag und Aufpralle. Bewegungssensor: nur bei aktivierter Neigungssteuerung; die Messwerte bleiben auf dem Gerät. Sprachausgabe: im Audiomodus liest die auf deinem Gerät installierte Sprach-Engine den Text vor; ihre Funktionsweise hängt von ihrem Anbieter ab.</p>
-    <h3>Webversion</h3>
-    <p>Die Webversion wird von GitHub Pages gehostet, das technische Informationen wie IP-Adressen protokollieren kann (siehe <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub-Datenschutzerklärung</a>). Diese Informationen können in den USA verarbeitet werden: Solche Übermittlungen sind durch den EU-US-Datenschutzrahmen (Angemessenheitsbeschluss vom 10. Juli 2023) abgesichert, sofern der Anbieter daran teilnimmt, andernfalls durch die Standardvertragsklauseln der Europäischen Kommission.</p>
-    <h3>Kinder</h3>
-    <p>Das Spiel erhebt von niemandem Daten, auch nicht von Kindern.</p>
-    <h3>Deine Rechte</h3>
-    <p>Der Herausgeber speichert keine Daten über dich: Bei ihm gibt es nichts einzusehen, zu berichtigen oder zu löschen. Deine Spieldaten bleiben unter deiner Kontrolle auf deinem Gerät. Bei Fragen zu deinen Daten schreib an <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>. Du kannst dich auch bei der CNIL, der französischen Datenschutzbehörde, beschweren: <a href="https://www.cnil.fr" rel="noopener">www.cnil.fr</a>, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, Frankreich.</p>
-    <h3>Besuchsstatistik (nur Webversion)</h3>
-    <p>Die Webversion des Spiels nutzt <a href="https://www.goatcounter.com/help/privacy" rel="noopener">GoatCounter</a>, einen Dienst zur Reichweitenmessung, der von Irland aus betrieben und in der Europäischen Union gehostet wird (Server in Finnland und Deutschland). Er zählt Seitenaufrufe ohne Cookies und ohne Kennung, die dich von einem Besuch zum nächsten verfolgen würde. Deine IP-Adresse dient nur dazu, das Land zu ermitteln und denselben Besuch nicht doppelt zu zählen: Sie wird nie gespeichert (höchstens einige Stunden im Arbeitsspeicher gehalten, dann vergessen). Aufbewahrt werden nur Gesamtstatistiken: aufgerufene Seiten, verweisende Website, Browser, ungefähres Land und Bildschirmgröße. Diese Messung dient nur dazu, die Besucherzahlen des Spiels zu kennen: Nach den Empfehlungen der CNIL ist sie von der Einwilligungspflicht ausgenommen. Rechtsgrundlage: berechtigtes Interesse an der Kenntnis der Besucherzahlen. Die Android-App misst nichts. Du kannst jederzeit in diesem Browser widersprechen:</p>
-    <p class="gc-choix"><button type="button" class="gc" data-gc="Nicht mitzählen|Wieder mitzählen" aria-pressed="false">Nicht mitzählen</button> <span data-gc-etat="Deine Besuche werden anonym gezählt.|Deine Besuche werden in diesem Browser nicht gezählt."></span></p>
-    <h3>Cookies</h3>
-    <p>Das Spiel verwendet keine Cookies und keine Werbe-Tracker; die Webversion nutzt nur die oben beschriebene cookiefreie Reichweitenmessung, die keine Einwilligung erfordert. Daher gibt es kein Einwilligungsbanner: Nur deine Spieldaten (und der Schlüssel <code>skipgc</code>, wenn du „Nicht mitzählen“ gewählt hast) werden im lokalen Speicher des Browsers oder der App auf deinem Gerät abgelegt.</p>
-    <h3>Bewertung im Play Store (Android-App)</h3>
-    <p>Nach deiner dritten geschafften Tagesaufgabe kann die Android-App einmalig das Bewertungsfenster von Google Play anzeigen. Dieses Fenster wird von Google Play nach eigenen Regeln betrieben; ÉCHO erhält weder deine Bewertung noch deinen Kommentar.</p>
-    <h3>Ergebnis teilen</h3>
-    <p>Die Schaltfläche „Teilen“ sendet nichts von selbst: Sie öffnet das Teilen-Menü deines Geräts (oder kopiert den Text), und du entscheidest, wohin er geht. Der Text enthält nur die Nummer der Aufgabe, deine Punkte, deine Serie und den Link zum Spiel.</p>
-    <h3>Nutzungsbedingungen</h3>
-    <p>ÉCHO ist kostenlos, ohne Konto und ohne Käufe. Es wird ohne Gewähr bereitgestellt: Dein Fortschritt wird auf deinem Gerät gespeichert und kann verloren gehen, wenn du seine Daten löschst. Das Spiel, seine Texte und Grafiken bleiben Eigentum ihres Urhebers. Es gilt französisches Recht.</p>
-    <h3>Impressum</h3>
-    <p>Herausgeber und Verantwortlicher für den Inhalt: Aulit42369, eine Privatperson, die dieses Spiel nicht beruflich veröffentlicht und anonym bleiben möchte; ihre Identifikationsdaten wurden dem Hoster mitgeteilt, wie es das französische Gesetz Nr. 2004-575 vom 21. Juni 2004 über das Vertrauen in die digitale Wirtschaft (LCEN) erlaubt.<br>
-    Hosting: GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA — Telefon: +1 877 448 4820 — <a href="https://support.github.com/contact" rel="noopener">support.github.com/contact</a>.</p>
-    <h3>Kontakt</h3>
-    <p>Fragen: <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>, oder eröffne ein Issue auf <a href="https://github.com/Aulit42369/Echo/issues" rel="noopener">der GitHub-Seite des Spiels</a>.</p>
-  </section>
-
-  <section id="it" lang="it">
-    <h2>Informativa sulla privacy</h2>
-    <p class="date">Ultimo aggiornamento: 28 ottobre 2026. Fa fede la versione francese.</p>
-    <h3>Nessun dato raccolto</h3>
-    <p>ÉCHO non raccoglie, trasmette né vende dati personali. Il gioco non contiene pubblicità né account utente; solo la versione web conta le visite, in forma anonima (vedi «Statistiche di visita»). L'app Android non richiede l'accesso a Internet.</p>
-    <h3>Dati salvati sul tuo dispositivo</h3>
-    <p>Il tuo record, le stelle, i punteggi della sfida del giorno, le opzioni e la lingua sono salvati solo sul tuo dispositivo. Vengono eliminati quando disinstalli il gioco o ne cancelli i dati.</p>
-    <h3>Funzioni del dispositivo</h3>
-    <p>Vibrazione: per il battito cardiaco e gli impatti. Sensore di movimento: solo se attivi il controllo con inclinazione; i dati restano sul dispositivo. Sintesi vocale: in modalità audio il testo viene letto dal motore vocale installato sul dispositivo; il suo funzionamento dipende dal fornitore.</p>
-    <h3>Versione web</h3>
-    <p>La versione web è ospitata da GitHub Pages, che può registrare informazioni tecniche come l'indirizzo IP (vedi l'<a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">informativa sulla privacy di GitHub</a>). Queste informazioni possono essere trattate negli Stati Uniti: tali trasferimenti sono coperti dal Data Privacy Framework UE-USA (decisione di adeguatezza del 10 luglio 2023) se il fornitore vi aderisce, altrimenti dalle clausole contrattuali tipo della Commissione europea.</p>
-    <h3>Minori</h3>
-    <p>Il gioco non raccoglie dati da nessuno, minori compresi.</p>
-    <h3>I tuoi diritti</h3>
-    <p>L'editore non conserva alcun dato su di te: non c'è nulla da consultare, correggere o cancellare da parte sua. I tuoi dati di gioco restano sotto il tuo controllo, sul tuo dispositivo. Per qualsiasi domanda sui tuoi dati scrivi a <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>. Puoi anche presentare un reclamo alla CNIL, l'autorità francese per la protezione dei dati: <a href="https://www.cnil.fr" rel="noopener">www.cnil.fr</a>, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, Francia.</p>
-    <h3>Statistiche di visita (solo versione web)</h3>
-    <p>La versione web del gioco usa <a href="https://www.goatcounter.com/help/privacy" rel="noopener">GoatCounter</a>, un servizio di misurazione dell'audience gestito dall'Irlanda e ospitato nell'Unione europea (server in Finlandia e Germania). Conta le pagine viste senza cookie e senza alcun identificativo che ti segua da una visita all'altra. Il tuo indirizzo IP serve solo a ricavare il paese e a non contare due volte la stessa visita: non viene mai registrato (resta in memoria al massimo qualche ora, poi viene dimenticato). Si conservano solo statistiche complessive: pagine viste, sito di provenienza, browser, paese e dimensione dello schermo approssimativi. Questa misurazione serve solo a conoscere l'affluenza del gioco: è esente da consenso secondo le raccomandazioni della CNIL. Base giuridica: il legittimo interesse a conoscere l'affluenza del gioco. L'app Android non misura nulla. Puoi opporti in qualsiasi momento su questo browser:</p>
-    <p class="gc-choix"><button type="button" class="gc" data-gc="Non contarmi|Contami di nuovo" aria-pressed="false">Non contarmi</button> <span data-gc-etat="Le tue visite sono contate in forma anonima.|Le tue visite non sono contate su questo browser."></span></p>
-    <h3>Cookie</h3>
-    <p>Il gioco non usa cookie né tracker pubblicitari; la versione web usa solo la misurazione dell'audience senza cookie descritta sopra, esente da consenso. Quindi non c'è alcun banner di consenso: solo i tuoi dati di gioco (e la chiave <code>skipgc</code> se hai scelto «Non contarmi») restano nella memoria locale del browser o dell'app, sul tuo dispositivo.</p>
-    <h3>Recensione sul Play Store (app Android)</h3>
-    <p>Dopo la tua terza Sfida del giorno completata, l'app Android può mostrare una sola volta la finestra di valutazione di Google Play. Questa finestra è gestita da Google Play secondo le sue regole; ÉCHO non riceve né il tuo voto né il tuo commento.</p>
-    <h3>Condividere il risultato</h3>
-    <p>Il pulsante «Condividi» non invia nulla da solo: apre la condivisione del tuo dispositivo (o copia il testo) e scegli tu dove inviarlo. Il testo contiene solo il numero della sfida, il punteggio, la serie e il link del gioco.</p>
-    <h3>Condizioni d'uso</h3>
-    <p>ÉCHO è gratuito, senza account e senza acquisti. È fornito così com'è, senza garanzia: i tuoi progressi restano sul dispositivo e possono andare persi se ne cancelli i dati. Il gioco, i testi e la grafica restano di proprietà del loro autore. Queste condizioni sono regolate dalla legge francese.</p>
-    <h3>Note legali</h3>
-    <p>Editore e direttore della pubblicazione: Aulit42369, persona fisica che pubblica questo gioco a titolo non professionale e ha scelto l'anonimato; i suoi dati identificativi sono stati comunicati al fornitore di hosting, come consentito dalla legge francese n. 2004-575 del 21 giugno 2004 sulla fiducia nell'economia digitale (LCEN).<br>
-    Hosting: GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, Stati Uniti — telefono: +1 877 448 4820 — <a href="https://support.github.com/contact" rel="noopener">support.github.com/contact</a>.</p>
-    <h3>Contatti</h3>
-    <p>Domande: <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>, oppure apri una segnalazione sulla <a href="https://github.com/Aulit42369/Echo/issues" rel="noopener">pagina GitHub del gioco</a>.</p>
-  </section>
-
-  <section id="pt" lang="pt">
-    <h2>Política de privacidade</h2>
-    <p class="date">Última atualização: 28 de outubro de 2026. A versão em francês é a que prevalece.</p>
-    <h3>Nenhum dado coletado</h3>
-    <p>O ÉCHO não coleta, transmite nem vende dados pessoais. O jogo não tem anúncios nem contas de usuário; só a versão web conta as visitas, de forma anônima (veja “Estatísticas de visita”). O app Android não solicita acesso à internet.</p>
-    <h3>Dados salvos no seu aparelho</h3>
-    <p>Seu recorde, estrelas, pontuações do desafio do dia, opções e idioma ficam salvos apenas no seu aparelho. Eles são apagados quando você desinstala o jogo ou limpa os dados dele.</p>
-    <h3>Recursos do aparelho</h3>
-    <p>Vibração: para o batimento cardíaco e os impactos. Sensor de movimento: só se você ativar o controle por inclinação; as leituras ficam no aparelho. Síntese de voz: no modo áudio, o texto é lido pelo mecanismo de voz instalado no aparelho; o funcionamento depende do fornecedor.</p>
-    <h3>Versão web</h3>
-    <p>A versão web é hospedada pelo GitHub Pages, que pode registrar informações técnicas como o endereço IP (veja a <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">Declaração de Privacidade do GitHub</a>). Essas informações podem ser tratadas nos Estados Unidos: essas transferências são amparadas pelo Data Privacy Framework UE–EUA (decisão de adequação de 10 de julho de 2023) quando o fornecedor aderiu a ele e, caso contrário, pelas cláusulas contratuais-padrão da Comissão Europeia.</p>
-    <h3>Crianças</h3>
-    <p>O jogo não coleta dados de ninguém, inclusive de crianças.</p>
-    <h3>Seus direitos</h3>
-    <p>O editor não guarda nenhum dado sobre você: não há nada a consultar, corrigir ou apagar do lado dele. Seus dados de jogo ficam sob seu controle, no seu aparelho. Para qualquer dúvida sobre seus dados, escreva para <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>. Você também pode apresentar uma reclamação à CNIL, a autoridade francesa de proteção de dados: <a href="https://www.cnil.fr" rel="noopener">www.cnil.fr</a>, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, França.</p>
-    <h3>Estatísticas de visita (somente versão web)</h3>
-    <p>A versão web do jogo usa o <a href="https://www.goatcounter.com/help/privacy" rel="noopener">GoatCounter</a>, um serviço de medição de audiência operado a partir da Irlanda e hospedado na União Europeia (servidores na Finlândia e na Alemanha). Ele conta as páginas vistas sem cookies e sem nenhum identificador que siga você de uma visita para outra. Seu endereço IP serve apenas para deduzir o país e não contar duas vezes a mesma visita: ele nunca é registrado (fica na memória por algumas horas no máximo e depois é esquecido). Só são guardadas estatísticas gerais: páginas vistas, site de origem, navegador, país e tamanho de tela aproximados. Essa medição serve apenas para conhecer a audiência do jogo: ela é isenta de consentimento, segundo as recomendações da CNIL. Base legal: o interesse legítimo em conhecer a audiência do jogo. O app Android não mede nada. Você pode se opor a qualquer momento neste navegador:</p>
-    <p class="gc-choix"><button type="button" class="gc" data-gc="Não me contar|Voltar a me contar" aria-pressed="false">Não me contar</button> <span data-gc-etat="Suas visitas são contadas de forma anônima.|Suas visitas não são contadas neste navegador."></span></p>
-    <h3>Cookies</h3>
-    <p>O jogo não usa cookies nem rastreadores de publicidade; a versão web usa apenas a medição de audiência sem cookies descrita acima, isenta de consentimento. Por isso não há aviso de consentimento: apenas os seus dados de jogo (e a chave <code>skipgc</code>, se você escolheu “Não me contar”) ficam no armazenamento local do navegador ou do app, no seu aparelho.</p>
-    <h3>Avaliação na Play Store (app Android)</h3>
-    <p>Depois do seu terceiro Desafio do dia concluído, o app Android pode mostrar uma única vez a janela de avaliação do Google Play. Essa janela é gerenciada pelo Google Play, segundo as regras dele; o ÉCHO não recebe sua nota nem seu comentário.</p>
-    <h3>Compartilhar o resultado</h3>
-    <p>O botão “Compartilhar” não envia nada sozinho: ele abre o compartilhamento do aparelho (ou copia o texto) e você escolhe para onde enviar. O texto contém apenas o número do desafio, sua pontuação, sua sequência e o link do jogo.</p>
-    <h3>Termos de uso</h3>
-    <p>ÉCHO é gratuito, sem conta e sem compras. É oferecido como está, sem garantia: seu progresso fica no aparelho e pode ser perdido se você limpar os dados. O jogo, seus textos e imagens continuam sendo propriedade do autor. Estes termos são regidos pela lei francesa.</p>
-    <h3>Informações legais</h3>
-    <p>Editor e diretor da publicação: Aulit42369, pessoa física que publica este jogo a título não profissional e optou pelo anonimato; seus dados de identificação foram informados à hospedagem, como permite a lei francesa nº 2004-575, de 21 de junho de 2004, para a confiança na economia digital (LCEN).<br>
-    Hospedagem: GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, Estados Unidos — telefone: +1 877 448 4820 — <a href="https://support.github.com/contact" rel="noopener">support.github.com/contact</a>.</p>
-    <h3>Contato</h3>
-    <p>Dúvidas: <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>, ou abra uma issue na <a href="https://github.com/Aulit42369/Echo/issues" rel="noopener">página do jogo no GitHub</a>.</p>
-  </section>
-
-  <section id="ja" lang="ja">
-    <h2>プライバシーポリシー</h2>
-    <p class="date">最終更新日：2026年10月28日。フランス語版が正文となります。</p>
-    <h3>データは収集しません</h3>
-    <p>ÉCHO は個人データを収集・送信・販売しません。広告やユーザーアカウントはありません。アクセスを匿名で数えるのはウェブ版だけです（「アクセス統計」を参照）。Android アプリはインターネット接続の権限を要求しません。</p>
-    <h3>端末に保存されるデータ</h3>
-    <p>最高記録、星、デイリーチャレンジのスコア、設定、言語は端末内にのみ保存されます。ゲームをアンインストールするか、データを消去すると削除されます。</p>
-    <h3>端末の機能</h3>
-    <p>振動：鼓動や衝撃の表現に使用します。モーションセンサー：傾き操作をオンにした場合のみ使用し、測定値は端末から出ません。音声合成：オーディオモードでは端末にインストールされた音声エンジンがテキストを読み上げます。その動作は提供元によります。</p>
-    <h3>ウェブ版</h3>
-    <p>ウェブ版は GitHub Pages でホストされており、IP アドレスなどの技術情報が記録される場合があります（<a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub のプライバシーに関する声明</a>を参照）。 これらの情報は米国で処理される場合があります。この移転は、事業者が参加している場合は EU・米国データプライバシーフレームワーク（2023年7月10日の十分性認定）により、それ以外の場合は欧州委員会の標準契約条項により保護されます。</p>
-    <h3>お子様について</h3>
-    <p>本ゲームはお子様を含め、誰からもデータを収集しません。</p>
-    <h3>あなたの権利</h3>
-    <p>運営者はあなたに関するデータを一切保有していないため、閲覧・訂正・削除の対象となるものはありません。ゲームのデータは端末内で、あなたの管理下にあります。データに関するご質問は <a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a> までお送りください。フランスのデータ保護機関 CNIL に苦情を申し立てることもできます：<a href="https://www.cnil.fr" rel="noopener">www.cnil.fr</a>, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, France。</p>
-    <h3>アクセス統計（ウェブ版のみ）</h3>
-    <p>ウェブ版では <a href="https://www.goatcounter.com/help/privacy" rel="noopener">GoatCounter</a> を使用しています。アイルランドから運営され、欧州連合内（フィンランドとドイツのサーバー）でホストされているアクセス解析サービスです。Cookie も、訪問をまたいであなたを追跡する識別子も使わずにページビューを数えます。IP アドレスは国の推定と同じ訪問の重複カウント防止にのみ使われ、保存されることはありません（最大数時間メモリに保持された後、破棄されます）。保存されるのは、閲覧ページ、参照元サイト、ブラウザ、おおよその国と画面サイズといった全体の統計だけです。この計測はゲームの利用状況を知るためだけのもので、CNIL の勧告により同意は不要とされています。法的根拠：ゲームの利用状況を知るという正当な利益。Android アプリでは何も計測しません。このブラウザでいつでも拒否できます：</p>
-    <p class="gc-choix"><button type="button" class="gc" data-gc="カウントしない|再びカウントする" aria-pressed="false">カウントしない</button> <span data-gc-etat="あなたの訪問は匿名でカウントされています。|このブラウザでの訪問はカウントされません。"></span></p>
-    <h3>Cookie</h3>
-    <p>本ゲームは Cookie や広告トラッカーを使用しません。ウェブ版では上記の Cookie を使わないアクセス解析のみを使用しており、同意は不要です。そのため同意バナーはありません。ゲームのデータ（および「カウントしない」を選んだ場合のキー <code>skipgc</code>）は、端末内のブラウザまたはアプリのローカルストレージにのみ保存されます。</p>
-    <h3>Play ストアのレビュー（Android アプリ）</h3>
-    <p>3回目のデイリーチャレンジをクリアした後、Android アプリが Google Play の評価ウィンドウを一度だけ表示することがあります。このウィンドウは Google Play が独自のルールで管理しており、ÉCHO があなたの評価やコメントを受け取ることはありません。</p>
-    <h3>結果のシェア</h3>
-    <p>「シェア」ボタンが自動で何かを送信することはありません。端末の共有メニューを開く（またはテキストをコピーする）だけで、送り先はあなたが選びます。テキストに含まれるのはチャレンジ番号、スコア、連続日数、ゲームのリンクのみです。</p>
-    <h3>利用規約</h3>
-    <p>ÉCHO は無料で、アカウントも課金もありません。現状のまま無保証で提供されます。進行状況は端末に保存されるため、データを消去すると失われることがあります。ゲーム、テキスト、画像の権利は作者に帰属します。本規約はフランス法に準拠します。</p>
-    <h3>運営者情報</h3>
-    <p>運営者・発行責任者：Aulit42369（本ゲームを非営利で公開している個人。匿名を選択しており、本人確認情報はホスティング事業者に提供済みです。デジタル経済における信頼のための2004年6月21日付フランス法第2004-575号（LCEN）に基づく）。<br>
-    ホスティング：GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, アメリカ合衆国　電話：+1 877 448 4820　<a href="https://support.github.com/contact" rel="noopener">support.github.com/contact</a>。</p>
-    <h3>お問い合わせ</h3>
-    <p>メール：<a href="mailto:aulit42369@gmail.com">aulit42369@gmail.com</a>、または <a href="https://github.com/Aulit42369/Echo/issues" rel="noopener">ゲームの GitHub ページ</a>で Issue を作成してください。</p>
-  </section>
+  <p>ÉCHO a déménagé : <a href="https://echo-jeu.github.io/privacy.html">echo-jeu.github.io</a></p>
+  <p class="en" lang="en">ÉCHO has moved: <a href="https://echo-jeu.github.io/privacy.html">echo-jeu.github.io</a></p>
 </main>
-<script>
-// Affiche la langue choisie (lien #xx) ou celle du navigateur ; toutes les sections restent dans la page.
-(() => {
-  const codes = ['fr', 'en', 'es', 'de', 'it', 'pt', 'ja'];
-  const pick = () => {
-    const h = location.hash.slice(1);
-    if (codes.includes(h)) return h;
-    for (const l of navigator.languages || [navigator.language || 'en']) { const c = String(l).slice(0, 2).toLowerCase(); if (codes.includes(c)) return c; }
-    return 'en';
-  };
-  const show = () => {
-    const c = pick();
-    document.documentElement.lang = c;
-    for (const s of document.querySelectorAll('main > section')) s.hidden = s.id !== c;
-    for (const a of document.querySelectorAll('nav a')) a.setAttribute('aria-current', a.dataset.l === c ? 'true' : 'false');
-  };
-  addEventListener('hashchange', show);
-  show();
-})();
-</script>
-<script>
-// « Ne pas être compté » : GoatCounter ne compte rien quand localStorage.skipgc === 't' (même règle que le Site).
-// Hors github.io (appli Android, local) le jeu ne compte rien : le bouton est masqué.
-(function () {
-  var web = /(^|\.)github\.io$/.test(location.hostname);
-  function off() { try { return localStorage.getItem('skipgc') === 't'; } catch (e) { return false; } }
-  function maj() {
-    var i = off() ? 1 : 0;
-    document.querySelectorAll('.gc-choix').forEach(function (el) { el.hidden = !web; });
-    document.querySelectorAll('[data-gc]').forEach(function (b) { b.textContent = b.getAttribute('data-gc').split('|')[i]; b.setAttribute('aria-pressed', String(!!i)); });
-    document.querySelectorAll('[data-gc-etat]').forEach(function (s) { s.textContent = s.getAttribute('data-gc-etat').split('|')[i]; });
-  }
-  document.addEventListener('click', function (e) {
-    if (!e.target.closest('[data-gc]')) return;
-    try { if (off()) localStorage.removeItem('skipgc'); else localStorage.setItem('skipgc', 't'); } catch (err) { /* stockage bloqué */ }
-    maj();
-  });
-  maj();
-})();
-</script>
 </body>
 </html>
