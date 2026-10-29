@@ -4,6 +4,7 @@ html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); o
   overscroll-behavior: none; -webkit-user-select: none; user-select: none;
   -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 canvas { display: block; position: fixed; inset: 0; width: 100%; height: 100%; touch-action: none; outline: none; }
+canvas:focus-visible { outline: 2px solid #5cf2ff; outline-offset: -4px; }
 /* Fin du défi du jour : seul élément HTML posé sur le canvas, dans la palette néon du jeu */
 #defiFin { position: fixed; left: 50%; bottom: max(20px, env(safe-area-inset-bottom)); transform: translateX(-50%);
   width: min(340px, calc(100% - 32px)); display: flex; flex-direction: column; gap: 10px; z-index: 2;
@@ -34,3 +35,6 @@ canvas { display: block; position: fixed; inset: 0; width: 100%; height: 100%; t
 #defiCopie { display: flex; flex-direction: column; gap: 6px; color: rgba(255, 255, 255, .75); font-size: 12px; }
 #defiTexte { -webkit-user-select: text; user-select: text; resize: none; padding: 10px 12px; border-radius: 12px;
   border: 1px solid rgba(92, 242, 255, .4); background: #05070a; color: #fff; font: 12px/1.45 ui-monospace, Consolas, monospace; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

@@ -8,7 +8,7 @@
 
 ## PWA
 - Hébergement : GitHub Pages, `https://aulit42369.github.io/Echo/` (domaine partagé avec le site, écart connu).
-- `sw.js` : constante `VERSION` (`echo-v2.4` au 28/10/2026) à monter à chaque changement ; liste `JEU` = mêmes fichiers que les balises de `index.html` ; ne purge que les caches `echo-*`.
+- `sw.js` : constante `VERSION` (`echo-v2.5` au 28/10/2026) à monter à chaque changement ; liste `JEU` = mêmes fichiers que les balises de `index.html` ; ne purge que les caches `echo-*`.
 - Manifest : `id` `/Echo/` (ne jamais modifier), `start_url` / `scope` `./`.
 - CSP en balise meta : `script-src 'self'` + empreinte `sha256` du seul script en ligne exécutable (compteur GoatCounter) + `https://gc.zgo.at` ; `connect-src`/`img-src` + `https://aulit42369.goatcounter.com`.
 - Pas de `robots.txt` possible (site de projet) : seul `sitemap.xml`.

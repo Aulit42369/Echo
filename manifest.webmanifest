@@ -1,8 +1,8 @@
 {
   "name": "ÉCHO",
   "short_name": "ÉCHO",
-  "description": "In the dark, only the echo guides you.",
-  "lang": "en",
+  "description": "Jeu de labyrinthe dans le noir : lance un écho pour révéler les murs.",
+  "lang": "fr",
   "id": "/Echo/",
   "start_url": "./",
   "scope": "./",

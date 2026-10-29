@@ -1,6 +1,6 @@
 // ÉCHO — service worker : le jeu fonctionne hors ligne après la première visite.
 // Change VERSION à chaque mise à jour pour forcer le rafraîchissement du cache.
-const VERSION = 'echo-v2.4';
+const VERSION = 'echo-v2.5';
 // Mêmes fichiers, même ordre que les balises de index.html (contrôlé par tests/chargement.test.js).
 const JEU = ['i18n', 'reglages', 'labyrinthe', 'sons', 'appareil', 'etat', 'entrees', 'niveau', 'logique', 'echos', 'ombres',
   'rendu', 'ecrans', 'defi-ecran', 'boucle'].map(n => './js/' + n + '.js');
@@ -31,8 +31,9 @@ self.addEventListener('fetch', e => {
         if (r.ok && estJeu) { const copy = r.clone(); e.waitUntil(caches.open(VERSION).then(c => c.put('./index.html', copy))); }
         return r;
       })
-      .catch(() => caches.match('./index.html')));
+      .catch(() => caches.open(VERSION).then(c => c.match('./index.html'))));
     return;
   }
-  e.respondWith(caches.match(e.request).then(hit => hit || fetch(e.request)));
+  // uniquement NOTRE cache de version : l'origine github.io est partagée avec d'autres dépôts
+  e.respondWith(caches.open(VERSION).then(c => c.match(e.request)).then(hit => hit || fetch(e.request)));
 });
